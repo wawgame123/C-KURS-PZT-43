@@ -1,0 +1,231 @@
+﻿@model test.Models.ViewModels.HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Расписание";
+}
+
+<div class="container-fluid mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h1 class="fw-bold">
+            Расписание
+        </h1>
+
+        <div>
+
+            <a asp-action="Index"
+               asp-route-type="weekly"
+               asp-route-mode="@Model.Filter.Mode"
+               asp-route-selectedTeacher="@Model.Filter.SelectedTeacher"
+               asp-route-selectedGroup="@Model.Filter.SelectedGroup"
+               class="btn btn-primary me-2">
+                Недельное
+            </a>
+
+            <a asp-action="Index"
+               asp-route-type="general"
+               asp-route-mode="@Model.Filter.Mode"
+               asp-route-selectedTeacher="@Model.Filter.SelectedTeacher"
+               asp-route-selectedGroup="@Model.Filter.SelectedGroup"
+               class="btn btn-dark">
+                Общее
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <form method="get"
+                  asp-action="Index">
+
+                <input type="hidden"
+                       name="type"
+                       value="@Model.Filter.ScheduleType" />
+
+                <div class="row g-3 align-items-end">
+
+                    <div class="col-md-3">
+
+                        <label class="form-label">
+                            Режим
+                        </label>
+
+                        <select class="form-select"
+                                id="modeSelect"
+                                name="mode">
+
+                            <option value="student"
+                                    selected="@(Model.Filter.Mode == "student")">
+                                Ученик
+                            </option>
+
+                            <option value="teacher"
+                                    selected="@(Model.Filter.Mode == "teacher")">
+                                Преподаватель
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-4"
+                         id="groupContainer">
+
+                        <label class="form-label">
+                            Группа
+                        </label>
+
+                        <select class="form-select"
+                                name="selectedGroup">
+
+                            <option value="">
+                                Все группы
+                            </option>
+
+                            @foreach (var group in Model.Groups)
+                            {
+                                <option value="@group.Name"
+                                        selected="@(Model.Filter.SelectedGroup == group.Name)">
+                                    @group.Name
+                                </option>
+                            }
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-4"
+                         id="teacherContainer">
+
+                        <label class="form-label">
+                            Преподаватель
+                        </label>
+
+                        <select class="form-select"
+                                name="selectedTeacher">
+
+                            <option value="">
+                                Все преподаватели
+                            </option>
+
+                            @foreach (var teacher in Model.Teachers)
+                            {
+                                <option value="@teacher.FullName"
+                                        selected="@(Model.Filter.SelectedTeacher == teacher.FullName)">
+                                    @teacher.FullName
+                                </option>
+                            }
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-1">
+
+                        <button type="submit"
+                                class="btn btn-success w-100">
+                            OK
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        @foreach (var day in Model.ScheduleDays)
+        {
+            <div class="col-xl-4 col-lg-6 col-md-12 mb-4">
+
+                <div class="card h-100 shadow-sm schedule-card">
+
+                    <div class="card-header fw-bold fs-5">
+                        @day.DayTitle
+                    </div>
+
+                    <div class="card-body">
+
+                        @foreach (var lesson in day.Lessons)
+                        {
+                            <div class="lesson-block mb-3 p-3 border rounded">
+
+                                <div class="d-flex justify-content-between mb-2">
+
+                                    <span class="fw-bold">
+                                        Пара @lesson.LessonNumber
+                                    </span>
+
+                                    <span>
+                                        @lesson.Time
+                                    </span>
+
+                                </div>
+
+                                <div class="fw-semibold mb-2">
+                                    @lesson.Subject
+                                </div>
+
+                                <div class="small text-muted mb-1">
+                                    Группа: @lesson.GroupName
+                                </div>
+
+                                <div class="small text-muted mb-1">
+                                    Преподаватель: @lesson.Teacher
+                                </div>
+
+                                <div class="small text-muted">
+                                    Кабинет: @lesson.Classroom
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<script>
+    const modeSelect = document.getElementById('modeSelect');
+
+    const groupContainer =
+        document.getElementById('groupContainer');
+
+    const teacherContainer =
+        document.getElementById('teacherContainer');
+
+    function updateMode()
+    {
+        if (modeSelect.value === 'teacher')
+        {
+            teacherContainer.style.display = 'block';
+            groupContainer.style.display = 'none';
+        }
+        else
+        {
+            teacherContainer.style.display = 'none';
+            groupContainer.style.display = 'block';
+        }
+    }
+
+    modeSelect.addEventListener('change', updateMode);
+
+    updateMode();
+</script>

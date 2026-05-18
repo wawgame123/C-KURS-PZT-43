@@ -1,0 +1,51 @@
+﻿@model test.Models.ViewModels.ScheduleViewModel
+
+@{
+    ViewData["Title"] = "Расписание";
+}
+
+<div class="container mt-4">
+
+    <h1 class="mb-4">Расписание</h1>
+
+    @foreach (var day in Model.Days)
+    {
+        <div class="card mb-4">
+
+            <div class="card-header">
+                @day.DayTitle
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-bordered">
+
+                    <thead>
+                        <tr>
+                            <th>Время</th>
+                            <th>Предмет</th>
+                            <th>Группа</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var lesson in day.Lessons)
+                        {
+                            <tr>
+                                <td>@lesson.Time</td>
+                                <td>@lesson.Subject</td>
+                                <td>@lesson.GroupName</td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    }
+
+</div>
