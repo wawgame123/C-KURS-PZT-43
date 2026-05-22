@@ -345,27 +345,24 @@
 
                                                 <div class="lesson-block mb-3">
 
-                                                    <div class="d-flex justify-content-between align-items-center mb-3">
-
-                                                        <div class="fw-bold">
+                                                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                                                        <div class="fw-bold lesson-num text-nowrap">
                                                             Пара @lesson.LessonNumber
                                                         </div>
-
-                                                        <div>
+                                                        <div class="lesson-time text-end  small">
                                                             @lesson.Time
                                                         </div>
-
                                                     </div>
 
-                                                    <div class="subject-title">
+                                                    <div class="subject-title lesson-subject">
                                                         @lesson.Subject
                                                     </div>
 
-                                                    <div class="lesson-info">
+                                                    <div class="lesson-info lesson-teacher">
                                                         @lesson.Teacher
                                                     </div>
 
-                                                    <div class="lesson-info">
+                                                    <div class="lesson-info lesson-room">
                                                         Кабинет: @lesson.Classroom
                                                     </div>
 
@@ -401,16 +398,13 @@
 
                                         <div class="lesson-block h-100">
 
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-
-                                                <div class="fw-bold lesson-num">
+                                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
+                                                <div class="fw-bold lesson-num text-nowrap">
                                                     Пара @lesson.LessonNumber
                                                 </div>
-
-                                                <div class="lesson-time">
+                                                <div class="lesson-time text-end  small">
                                                     @lesson.Time
                                                 </div>
-
                                             </div>
 
                                             <div class="subject-title lesson-subject">
