@@ -3,76 +3,88 @@
   "WorkspaceRootPath": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\services\\scheduleparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\services\\scheduleparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\viewmodels\\homeindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\models\\viewmodels\\homeindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\viewmodels\\schedulefilterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\models\\viewmodels\\schedulefilterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\viewmodels\\scheduleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\models\\viewmodels\\scheduleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\services\\scheduleparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\services\\scheduleparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\schedulelesson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\models\\schedulelesson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\services\\interfaces\\ischeduleparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\services\\interfaces\\ischeduleparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\schedulelesson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\models\\schedulelesson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\viewmodels\\schedulefilterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\models\\viewmodels\\schedulefilterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\views\\home\\schedule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\views\\home\\schedule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\viewmodels\\homeindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\models\\viewmodels\\homeindexviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\viewmodels\\scheduleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\models\\viewmodels\\scheduleviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\services\\interfaces\\ischeduleparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\services\\interfaces\\ischeduleparserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\data\\departmentdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\data\\departmentdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\scheduleday.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\models\\scheduleday.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\views\\home\\schedule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\views\\home\\schedule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\curatedgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\models\\curatedgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\scheduleday.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\models\\scheduleday.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\models\\teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\models\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\models\\group.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{5C2A23F5-81AE-4436-A429-F0DA55AF4558}|test\\test.csproj|solutionrelative:test\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\curatedgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\models\\curatedgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\models\\teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\models\\teacher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|c:\\users\\tupik\\onedrive\\\u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\github\\c#  kurs pzt-43\\test\\test\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A1E64AE-D0ED-E6EE-0445-2888C87C6BF3}|test\\test.csproj|solutionrelative:test\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -82,37 +94,27 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 9,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Program.cs",
+              "RelativeDocumentMoniker": "test\\Program.cs",
+              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Program.cs",
+              "RelativeToolTip": "test\\Program.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACoAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T19:04:16.765Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ScheduleFilterViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\ViewModels\\ScheduleFilterViewModel.cs",
-              "RelativeDocumentMoniker": "test\\Models\\ViewModels\\ScheduleFilterViewModel.cs",
-              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\ViewModels\\ScheduleFilterViewModel.cs",
-              "RelativeToolTip": "test\\Models\\ViewModels\\ScheduleFilterViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:56:08.692Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Schedule.cshtml",
-              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Views\\Home\\Schedule.cshtml",
-              "RelativeDocumentMoniker": "test\\Views\\Home\\Schedule.cshtml",
-              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Views\\Home\\Schedule.cshtml",
-              "RelativeToolTip": "test\\Views\\Home\\Schedule.cshtml",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAcwDIAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-18T18:46:36.482Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
               "Title": "ScheduleViewModel.cs",
               "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\ViewModels\\ScheduleViewModel.cs",
               "RelativeDocumentMoniker": "test\\Models\\ViewModels\\ScheduleViewModel.cs",
@@ -120,60 +122,31 @@
               "RelativeToolTip": "test\\Models\\ViewModels\\ScheduleViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:45:46.404Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-18T18:45:46.404Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ScheduleParserService.cs",
-              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Services\\ScheduleParserService.cs",
-              "RelativeDocumentMoniker": "test\\Services\\ScheduleParserService.cs",
-              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Services\\ScheduleParserService.cs",
-              "RelativeToolTip": "test\\Services\\ScheduleParserService.cs",
-              "ViewState": "AgIAAKAAAAAAAAAAAAAcwMIAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:44:53.256Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IScheduleParserService.cs",
-              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Services\\Interfaces\\IScheduleParserService.cs",
-              "RelativeDocumentMoniker": "test\\Services\\Interfaces\\IScheduleParserService.cs",
-              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Services\\Interfaces\\IScheduleParserService.cs",
-              "RelativeToolTip": "test\\Services\\Interfaces\\IScheduleParserService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:44:05.351Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "ScheduleLesson.cs",
               "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\ScheduleLesson.cs",
               "RelativeDocumentMoniker": "test\\Models\\ScheduleLesson.cs",
               "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\ScheduleLesson.cs",
               "RelativeToolTip": "test\\Models\\ScheduleLesson.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:42:42.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-18T18:42:42.227Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "test\\Views\\Home\\Index.cshtml",
               "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "test\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOYAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAALYBAAAAAAAAAAAcwNgBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-18T18:41:11.142Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-18T18:41:11.142Z"
             },
             {
               "$type": "Document",
@@ -183,27 +156,123 @@
               "RelativeDocumentMoniker": "test\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Controllers\\HomeController.cs",
               "RelativeToolTip": "test\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAcwEoAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAKUBAAAAAAAAAAAAAIcBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-18T18:40:55.689Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
+              "Title": "ScheduleFilterViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\ViewModels\\ScheduleFilterViewModel.cs",
+              "RelativeDocumentMoniker": "test\\Models\\ViewModels\\ScheduleFilterViewModel.cs",
+              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\ViewModels\\ScheduleFilterViewModel.cs",
+              "RelativeToolTip": "test\\Models\\ViewModels\\ScheduleFilterViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T18:56:08.692Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "HomeIndexViewModel.cs",
               "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\ViewModels\\HomeIndexViewModel.cs",
               "RelativeDocumentMoniker": "test\\Models\\ViewModels\\HomeIndexViewModel.cs",
               "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\ViewModels\\HomeIndexViewModel.cs",
               "RelativeToolTip": "test\\Models\\ViewModels\\HomeIndexViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:40:15.512Z",
+              "WhenOpened": "2026-05-18T18:40:15.512Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IScheduleParserService.cs",
+              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Services\\Interfaces\\IScheduleParserService.cs",
+              "RelativeDocumentMoniker": "test\\Services\\Interfaces\\IScheduleParserService.cs",
+              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Services\\Interfaces\\IScheduleParserService.cs",
+              "RelativeToolTip": "test\\Services\\Interfaces\\IScheduleParserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T18:44:05.351Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ScheduleParserService.cs",
+              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Services\\ScheduleParserService.cs",
+              "RelativeDocumentMoniker": "test\\Services\\ScheduleParserService.cs",
+              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Services\\ScheduleParserService.cs",
+              "RelativeToolTip": "test\\Services\\ScheduleParserService.cs",
+              "ViewState": "AgIAAAoBAAAAAAAAAAAgwCABAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T18:44:53.256Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DepartmentData.cs",
+              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Data\\DepartmentData.cs",
+              "RelativeDocumentMoniker": "test\\Data\\DepartmentData.cs",
+              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Data\\DepartmentData.cs",
+              "RelativeToolTip": "test\\Data\\DepartmentData.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwE0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-22T18:34:18.394Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 10,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "test\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "test\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAcwH0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-05-18T19:06:17.039Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "site.js",
+              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\wwwroot\\js\\site.js",
+              "RelativeDocumentMoniker": "test\\wwwroot\\js\\site.js",
+              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\wwwroot\\js\\site.js",
+              "RelativeToolTip": "test\\wwwroot\\js\\site.js",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAcwCQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-05-18T19:06:30.272Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "test\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "test\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAcwCcAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T19:12:10.961Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Schedule.cshtml",
+              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Views\\Home\\Schedule.cshtml",
+              "RelativeDocumentMoniker": "test\\Views\\Home\\Schedule.cshtml",
+              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Views\\Home\\Schedule.cshtml",
+              "RelativeToolTip": "test\\Views\\Home\\Schedule.cshtml",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAcwDIAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T18:46:36.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "ScheduleDay.cs",
               "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\ScheduleDay.cs",
               "RelativeDocumentMoniker": "test\\Models\\ScheduleDay.cs",
@@ -211,25 +280,11 @@
               "RelativeToolTip": "test\\Models\\ScheduleDay.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:43:00.591Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-18T18:43:00.591Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Program.cs",
-              "RelativeDocumentMoniker": "test\\Program.cs",
-              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Program.cs",
-              "RelativeToolTip": "test\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:36:11.561Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "Group.cs",
               "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\Group.cs",
               "RelativeDocumentMoniker": "test\\Models\\Group.cs",
@@ -237,12 +292,11 @@
               "RelativeToolTip": "test\\Models\\Group.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:31:04.496Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-18T18:31:04.496Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "test\\Controllers\\AdminController.cs",
@@ -250,25 +304,11 @@
               "RelativeToolTip": "test\\Controllers\\AdminController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:35:10.483Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-18T18:35:10.483Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 17,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\appsettings.json",
-              "RelativeDocumentMoniker": "test\\appsettings.json",
-              "ToolTip": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\appsettings.json",
-              "RelativeToolTip": "test\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-05-18T18:32:45.693Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
               "Title": "CuratedGroup.cs",
               "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\CuratedGroup.cs",
               "RelativeDocumentMoniker": "test\\Models\\CuratedGroup.cs",
@@ -276,16 +316,11 @@
               "RelativeToolTip": "test\\Models\\CuratedGroup.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:32:04.098Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "WhenOpened": "2026-05-18T18:32:04.098Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "Teacher.cs",
               "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Models\\Teacher.cs",
               "RelativeDocumentMoniker": "test\\Models\\Teacher.cs",
@@ -293,12 +328,11 @@
               "RelativeToolTip": "test\\Models\\Teacher.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:31:52.445Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-18T18:31:52.445Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 19,
               "Title": "DbInitializer.cs",
               "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Data\\DbInitializer.cs",
               "RelativeDocumentMoniker": "test\\Data\\DbInitializer.cs",
@@ -306,12 +340,11 @@
               "RelativeToolTip": "test\\Data\\DbInitializer.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAAcwEIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:31:42.085Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-18T18:31:42.085Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 20,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\tupik\\OneDrive\\\u0414\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u044B\\GitHub\\C#  KURS PZT-43\\test\\test\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "test\\Data\\ApplicationDbContext.cs",
@@ -319,8 +352,7 @@
               "RelativeToolTip": "test\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAIwCMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-18T18:31:31.063Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-18T18:31:31.063Z"
             }
           ]
         }

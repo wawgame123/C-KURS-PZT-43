@@ -4,7 +4,7 @@
     ViewData["Title"] = "Расписание";
 }
 
-<div class="container-fluid mt-4">
+<div class="container-fluid py-4">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
 
@@ -12,44 +12,141 @@
             Расписание
         </h1>
 
-        <div>
-
-            <a asp-action="Index"
-               asp-route-type="weekly"
-               asp-route-mode="@Model.Filter.Mode"
-               asp-route-selectedTeacher="@Model.Filter.SelectedTeacher"
-               asp-route-selectedGroup="@Model.Filter.SelectedGroup"
-               class="btn btn-primary me-2">
-                Недельное
-            </a>
-
-            <a asp-action="Index"
-               asp-route-type="general"
-               asp-route-mode="@Model.Filter.Mode"
-               asp-route-selectedTeacher="@Model.Filter.SelectedTeacher"
-               asp-route-selectedGroup="@Model.Filter.SelectedGroup"
-               class="btn btn-dark">
-                Общее
-            </a>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-secondary"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#settingsPanel"
+                    aria-expanded="false"
+                    aria-controls="settingsPanel">
+                Настройки
+            </button>
 
         </div>
 
     </div>
 
-    <div class="card shadow-sm mb-4">
+    <div class="collapse mb-3"
+         id="settingsPanel">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="row g-3 align-items-end">
+                    <div class="col-xl-2 col-lg-3 col-md-4">
+                        <label class="form-label">Тема</label>
+                        <button class="btn btn-outline-secondary w-100"
+                                id="themeToggle"
+                                type="button">
+                            Переключить
+                        </button>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-3 col-md-4">
+                        <label class="form-label">Размер карточек</label>
+                        <select class="form-select"
+                                id="cardSizeSelect">
+                            <option value="min">Минимум</option>
+                            <option value="max">Максимум</option>
+                        </select>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-3 col-md-4">
+                        <label class="form-label">По умолчанию</label>
+                        <select class="form-select"
+                                id="defaultTargetMode">
+                            <option value="group">Группа</option>
+                            <option value="teacher">Преподаватель</option>
+                        </select>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <label class="form-label">Группа по умолчанию</label>
+                        <select class="form-select"
+                                id="defaultGroupSetting">
+                            <option value="">Не выбрано</option>
+                            @foreach (var group in Model.Groups)
+                            {
+                                <option value="@group.Name">@group.Name</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-6 col-md-6">
+                        <label class="form-label">Преподаватель по умолчанию</label>
+                        <select class="form-select"
+                                id="defaultTeacherSetting">
+                            <option value="">Не выбрано</option>
+                            @foreach (var teacher in Model.Teachers)
+                            {
+                                <option value="@teacher.FullName">@teacher.FullName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-3 col-md-4">
+                        <label class="form-label">Режим отображения</label>
+                        <select class="form-select"
+                                id="layoutModeSelect">
+                            <option value="vertical">Вертикально</option>
+                            <option value="horizontal">Горизонтально</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-end">
+                        <button class="btn btn-primary"
+                                type="button"
+                                id="saveSettingsBtn">
+                            Сохранить настройки
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4 filter-card">
 
         <div class="card-body">
 
-            <form method="get"
-                  asp-action="Index">
+            <form method="post"
+                  asp-action="Index"
+                  id="filterForm">
 
-                <input type="hidden"
-                       name="type"
-                       value="@Model.Filter.ScheduleType" />
+                <button class="btn btn-outline-secondary w-100 d-md-none mb-3"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mobileFilters"
+                        aria-expanded="false"
+                        aria-controls="mobileFilters">
+                    Фильтры
+                </button>
 
-                <div class="row g-3 align-items-end">
+                <div class="row g-3 collapse show"
+                     id="mobileFilters">
 
-                    <div class="col-md-3">
+                    <div class="col-xl-2 col-lg-3">
+
+                        <label class="form-label">
+                            Источник
+                        </label>
+
+                        <select class="form-select"
+                                name="SourceType">
+
+                            <option value="file"
+                                    selected="@(Model.Filter.SourceType == "file")">
+                                Excel
+                            </option>
+
+                            <option value="site"
+                                    selected="@(Model.Filter.SourceType == "site")">
+                                Сайт
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-xl-2 col-lg-3">
 
                         <label class="form-label">
                             Режим
@@ -57,7 +154,7 @@
 
                         <select class="form-select"
                                 id="modeSelect"
-                                name="mode">
+                                name="Mode">
 
                             <option value="student"
                                     selected="@(Model.Filter.Mode == "student")">
@@ -73,7 +170,44 @@
 
                     </div>
 
-                    <div class="col-md-4"
+                    <div class="col-xl-3 col-lg-4"
+                         id="departmentContainer">
+
+                        <label class="form-label">
+                            Отделение
+                        </label>
+
+                        <select class="form-select"
+                                id="departmentSelect"
+                                name="Department">
+
+                            @foreach (var department in Model.Departments)
+                            {
+                                <option value="@department.Key"
+                                        selected="@(Model.Filter.Department == department.Key)">
+                                    @test.Data.DepartmentData.DepartmentTitles[department.Key]
+                                </option>
+                            }
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4"
+                         id="groupCodeContainer">
+
+                        <label class="form-label">
+                            Направление
+                        </label>
+
+                        <select class="form-select"
+                                id="groupCodeSelect"
+                                name="GroupCode">
+                        </select>
+
+                    </div>
+
+                    <div class="col-xl-3 col-lg-6"
                          id="groupContainer">
 
                         <label class="form-label">
@@ -81,7 +215,8 @@
                         </label>
 
                         <select class="form-select"
-                                name="selectedGroup">
+                                id="selectedGroupSelect"
+                                name="SelectedGroup">
 
                             <option value="">
                                 Все группы
@@ -99,7 +234,7 @@
 
                     </div>
 
-                    <div class="col-md-4"
+                    <div class="col-xl-3 col-lg-6"
                          id="teacherContainer">
 
                         <label class="form-label">
@@ -107,7 +242,8 @@
                         </label>
 
                         <select class="form-select"
-                                name="selectedTeacher">
+                                id="selectedTeacherSelect"
+                                name="SelectedTeacher">
 
                             <option value="">
                                 Все преподаватели
@@ -125,13 +261,24 @@
 
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-xl-2 col-lg-3">
+
+                        <label class="form-label">
+                            &nbsp;
+                        </label>
 
                         <button type="submit"
-                                class="btn btn-success w-100">
-                            OK
+                                class="btn btn-primary w-100">
+                            Применить
                         </button>
 
+                    </div>
+                    
+                    <div class="col-12">
+                        <div class="layout-hint mt-1"
+                             id="layoutHint">
+                            Выберите группу, чтобы включить горизонтальный вид.
+                        </div>
                     </div>
 
                 </div>
@@ -146,47 +293,146 @@
 
         @foreach (var day in Model.ScheduleDays)
         {
-            <div class="col-xl-4 col-lg-6 col-md-12 mb-4">
+            <div class="col-12 mb-4">
 
                 <div class="card h-100 shadow-sm schedule-card">
 
-                    <div class="card-header fw-bold fs-5">
-                        @day.DayTitle
+                    <div class="card-header">
+
+                        <div class="fw-bold fs-4">
+                            @day.DayTitle
+                        </div>
+
                     </div>
 
                     <div class="card-body">
 
-                        @foreach (var lesson in day.Lessons)
+                        @if (
+                            string.IsNullOrWhiteSpace(Model.Filter.SelectedGroup) &&
+                            Model.Filter.Mode == "student")
                         {
-                            <div class="lesson-block mb-3 p-3 border rounded">
+                            var groupedLessons = day.Lessons
+                                .GroupBy(x => x.GroupName)
+                                .OrderByDescending(x => x.Key);
 
-                                <div class="d-flex justify-content-between mb-2">
+                            <div class="groups-grid">
 
-                                    <span class="fw-bold">
-                                        Пара @lesson.LessonNumber
-                                    </span>
+                                @foreach (var group in groupedLessons)
+                                {
+                                    <div class="group-column">
 
-                                    <span>
-                                        @lesson.Time
-                                    </span>
+                                        <div class="group-title">
+                                            @group.Key
+                                        </div>
 
-                                </div>
+                                        @{
+                                            var lessons =
+                                                group
+                                                .OrderBy(x => x.SortTime)
+                                                .ThenBy(x => x.LessonNumber)
+                                                .ToList();
+                                        }
 
-                                <div class="fw-semibold mb-2">
-                                    @lesson.Subject
-                                </div>
+                                        @for (int i = 0; i < lessons.Count; i++)
+                                        {
+                                            var lesson = lessons[i];
 
-                                <div class="small text-muted mb-1">
-                                    Группа: @lesson.GroupName
-                                </div>
+                                            bool isLastOdd =
+                                                lessons.Count % 2 != 0 &&
+                                                i == lessons.Count - 1;
 
-                                <div class="small text-muted mb-1">
-                                    Преподаватель: @lesson.Teacher
-                                </div>
+                                            <div class="lesson-wrapper @(isLastOdd ? "lesson-full" : "")">
 
-                                <div class="small text-muted">
-                                    Кабинет: @lesson.Classroom
-                                </div>
+                                                <div class="lesson-block mb-3">
+
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                                                        <div class="fw-bold">
+                                                            Пара @lesson.LessonNumber
+                                                        </div>
+
+                                                        <div>
+                                                            @lesson.Time
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="subject-title">
+                                                        @lesson.Subject
+                                                    </div>
+
+                                                    <div class="lesson-info">
+                                                        @lesson.Teacher
+                                                    </div>
+
+                                                    <div class="lesson-info">
+                                                        Кабинет: @lesson.Classroom
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        }
+
+                                    </div>
+                                }
+
+                            </div>
+                        }
+                        else
+                        {
+                            var lessons =
+                                day.Lessons
+                                .OrderBy(x => x.SortTime)
+                                .ThenBy(x => x.LessonNumber)
+                                .ToList();
+
+                            <div class="lesson-grid">
+
+                                @for (int i = 0; i < lessons.Count; i++)
+                                {
+                                    var lesson = lessons[i];
+
+                                    bool isLastOdd =
+                                        lessons.Count % 2 != 0 &&
+                                        i == lessons.Count - 1;
+
+                                    <div class="@(isLastOdd ? "lesson-full" : "")">
+
+                                        <div class="lesson-block h-100">
+
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                                                <div class="fw-bold lesson-num">
+                                                    Пара @lesson.LessonNumber
+                                                </div>
+
+                                                <div class="lesson-time">
+                                                    @lesson.Time
+                                                </div>
+
+                                            </div>
+
+                                            <div class="subject-title lesson-subject">
+                                                @lesson.Subject
+                                            </div>
+
+                                            <div class="lesson-info lesson-group">
+                                                @lesson.GroupName
+                                            </div>
+
+                                            <div class="lesson-info lesson-teacher">
+                                                @lesson.Teacher
+                                            </div>
+
+                                            <div class="lesson-info lesson-room">
+                                                Кабинет: @lesson.Classroom
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
 
                             </div>
                         }
@@ -203,29 +449,459 @@
 </div>
 
 <script>
-    const modeSelect = document.getElementById('modeSelect');
+
+    const departments =
+        @Html.Raw(
+                System.Text.Json.JsonSerializer.Serialize(
+                        Model.Departments));
+
+    const titles =
+    {
+        TAR: 'ТОР',
+        BSB: 'БСК',
+        BDA: 'БДА',
+        PGB: 'ПГБ',
+        PZT: 'ПЗТ',
+        AEP: 'АЭП',
+        AGB: 'АГБ'
+    };
+
+    const departmentSelect =
+        document.getElementById('departmentSelect');
+
+    const groupCodeSelect =
+        document.getElementById('groupCodeSelect');
+
+    function updateGroups()
+    {
+        if (!departmentSelect || !groupCodeSelect)
+        {
+            return;
+        }
+
+        const previousSelectedGroup =
+            groupCodeSelect.value;
+
+        const selectedDepartment =
+            departmentSelect.value;
+
+        groupCodeSelect.innerHTML = '';
+
+        const groups =
+            departments[selectedDepartment];
+
+        if (groups.length === 0)
+        {
+            const option =
+                document.createElement('option');
+
+            option.value = '';
+
+            option.text = 'Без выбора';
+
+            groupCodeSelect.appendChild(option);
+
+            return;
+        }
+
+        groups.forEach(group =>
+        {
+            const option =
+                document.createElement('option');
+
+            option.value = group;
+
+            option.text =
+                titles[group] ?? group;
+
+            if (group === previousSelectedGroup ||
+                group === '@Model.Filter.GroupCode')
+            {
+                option.selected = true;
+            }
+
+            groupCodeSelect.appendChild(option);
+        });
+
+        if (groupCodeSelect.selectedIndex < 0 &&
+            groupCodeSelect.options.length > 0)
+        {
+            groupCodeSelect.selectedIndex = 0;
+        }
+    }
+
+    if (departmentSelect)
+    {
+        departmentSelect.addEventListener(
+            'change',
+            updateGroups);
+
+        departmentSelect.addEventListener(
+            'change',
+            submitFilter);
+
+        updateGroups();
+    }
+
+    const modeSelect =
+        document.getElementById('modeSelect');
+
+    const teacherContainer =
+        document.getElementById('teacherContainer');
 
     const groupContainer =
         document.getElementById('groupContainer');
 
-    const teacherContainer =
-        document.getElementById('teacherContainer');
+    const departmentContainer =
+        document.getElementById('departmentContainer');
+
+    const groupCodeContainer =
+        document.getElementById('groupCodeContainer');
 
     function updateMode()
     {
         if (modeSelect.value === 'teacher')
         {
             teacherContainer.style.display = 'block';
+
             groupContainer.style.display = 'none';
+
+            departmentContainer.style.display = 'none';
+
+            groupCodeContainer.style.display = 'none';
         }
         else
         {
             teacherContainer.style.display = 'none';
+
             groupContainer.style.display = 'block';
+
+            departmentContainer.style.display = 'block';
+
+            groupCodeContainer.style.display = 'block';
         }
     }
 
-    modeSelect.addEventListener('change', updateMode);
+    modeSelect.addEventListener(
+        'change',
+        updateMode);
 
     updateMode();
+
+    const filterForm =
+        document.getElementById('filterForm');
+
+    function submitFilter()
+    {
+        if (!filterForm)
+        {
+            return;
+        }
+
+        filterForm.submit();
+    }
+
+    const sourceTypeSelect =
+        document.querySelector('select[name="SourceType"]');
+
+    if (sourceTypeSelect)
+    {
+        sourceTypeSelect.addEventListener(
+            'change',
+            submitFilter);
+    }
+
+    if (modeSelect)
+    {
+        modeSelect.addEventListener(
+            'change',
+            submitFilter);
+    }
+
+    if (groupCodeSelect)
+    {
+        groupCodeSelect.addEventListener(
+            'change',
+            submitFilter);
+    }
+
+    const layoutModeSelect =
+        document.getElementById('layoutModeSelect');
+
+    const selectedGroupSelect =
+        document.getElementById('selectedGroupSelect');
+
+    const selectedTeacherSelect =
+        document.getElementById('selectedTeacherSelect');
+
+    const layoutHint =
+        document.getElementById('layoutHint');
+
+    function applyLayout(layout)
+    {
+        document.body.classList.toggle(
+            'horizontal-layout',
+            layout === 'horizontal');
+    }
+
+    function hasSelectedGroup()
+    {
+        if (!selectedGroupSelect)
+        {
+            return false;
+        }
+
+        return selectedGroupSelect.value.trim() !== '';
+    }
+
+    if (layoutModeSelect)
+    {
+        const savedLayout =
+            localStorage.getItem('scheduleLayout') ?? 'vertical';
+
+        layoutModeSelect.value = savedLayout;
+
+        if (hasSelectedGroup())
+        {
+            applyLayout(savedLayout);
+
+            if (layoutHint)
+            {
+                layoutHint.style.display = 'none';
+            }
+        }
+        else
+        {
+            applyLayout('vertical');
+
+            if (layoutHint)
+            {
+                layoutHint.style.display = 'block';
+            }
+        }
+
+        layoutModeSelect.addEventListener('change', () =>
+        {
+            const requestedLayout =
+                layoutModeSelect.value === 'horizontal'
+                    ? 'horizontal'
+                    : 'vertical';
+
+            if (!hasSelectedGroup())
+            {
+                layoutModeSelect.value = 'vertical';
+                applyLayout('vertical');
+
+                if (layoutHint)
+                {
+                    layoutHint.style.display = 'block';
+                }
+
+                return;
+            }
+
+            if (layoutHint)
+            {
+                layoutHint.style.display = 'none';
+            }
+
+            localStorage.setItem(
+                'scheduleLayout',
+                requestedLayout);
+
+            applyLayout(requestedLayout);
+        });
+    }
+    else
+    {
+        document.body.classList.remove('horizontal-layout');
+    }
+
+    const cardSizeSelect =
+        document.getElementById('cardSizeSelect');
+
+    const defaultTargetMode =
+        document.getElementById('defaultTargetMode');
+
+    const defaultGroupSetting =
+        document.getElementById('defaultGroupSetting');
+
+    const defaultTeacherSetting =
+        document.getElementById('defaultTeacherSetting');
+
+    const saveSettingsBtn =
+        document.getElementById('saveSettingsBtn');
+
+    function applyCardSize(size)
+    {
+        document.body.classList.remove(
+            'card-size-min',
+            'card-size-max');
+
+        const normalized =
+            size === 'min' || size === 'max'
+                ? size
+                : 'max';
+
+        document.body.classList.add(
+            `card-size-${normalized}`);
+    }
+
+    const savedCardSize =
+        localStorage.getItem('scheduleCardSize') ?? 'max';
+
+    applyCardSize(savedCardSize);
+
+    if (cardSizeSelect)
+    {
+        cardSizeSelect.value = savedCardSize;
+
+        cardSizeSelect.addEventListener('change', () =>
+        {
+            applyCardSize(cardSizeSelect.value);
+        });
+    }
+
+    if (defaultTargetMode)
+    {
+        defaultTargetMode.value =
+            localStorage.getItem('defaultTargetMode') ?? 'group';
+    }
+
+    if (defaultGroupSetting)
+    {
+        defaultGroupSetting.value =
+            localStorage.getItem('defaultGroupValue') ?? '';
+    }
+
+    if (defaultTeacherSetting)
+    {
+        defaultTeacherSetting.value =
+            localStorage.getItem('defaultTeacherValue') ?? '';
+    }
+
+    function applyDefaultSelectionOnce()
+    {
+        const markerKey = 'scheduleDefaultsApplied';
+
+        if (sessionStorage.getItem(markerKey) === '1')
+        {
+            return;
+        }
+
+        if (!modeSelect)
+        {
+            return;
+        }
+
+        const modePref =
+            localStorage.getItem('defaultTargetMode') ?? 'group';
+
+        const defaultGroup =
+            localStorage.getItem('defaultGroupValue') ?? '';
+
+        const defaultTeacher =
+            localStorage.getItem('defaultTeacherValue') ?? '';
+
+        let changed = false;
+
+        if (modePref === 'group' && defaultGroup && selectedGroupSelect)
+        {
+            if (modeSelect.value !== 'student')
+            {
+                modeSelect.value = 'student';
+                changed = true;
+            }
+
+            if (selectedGroupSelect.value !== defaultGroup &&
+                Array.from(selectedGroupSelect.options)
+                    .some(x => x.value === defaultGroup))
+            {
+                selectedGroupSelect.value = defaultGroup;
+                changed = true;
+            }
+        }
+
+        if (modePref === 'teacher' &&
+            defaultTeacher &&
+            selectedTeacherSelect)
+        {
+            if (modeSelect.value !== 'teacher')
+            {
+                modeSelect.value = 'teacher';
+                changed = true;
+            }
+
+            if (selectedTeacherSelect.value !== defaultTeacher &&
+                Array.from(selectedTeacherSelect.options)
+                    .some(x => x.value === defaultTeacher))
+            {
+                selectedTeacherSelect.value = defaultTeacher;
+                changed = true;
+            }
+        }
+
+        if (changed)
+        {
+            sessionStorage.setItem(markerKey, '1');
+            updateMode();
+            submitFilter();
+        }
+    }
+
+    if (saveSettingsBtn)
+    {
+        saveSettingsBtn.addEventListener('click', () =>
+        {
+            if (cardSizeSelect)
+            {
+                const size =
+                    cardSizeSelect.value === 'min'
+                        ? 'min'
+                        : 'max';
+
+                localStorage.setItem(
+                    'scheduleCardSize',
+                    size);
+
+                applyCardSize(size);
+            }
+
+            if (defaultTargetMode)
+            {
+                localStorage.setItem(
+                    'defaultTargetMode',
+                    defaultTargetMode.value);
+            }
+
+            if (defaultGroupSetting)
+            {
+                localStorage.setItem(
+                    'defaultGroupValue',
+                    defaultGroupSetting.value);
+            }
+
+            if (defaultTeacherSetting)
+            {
+                localStorage.setItem(
+                    'defaultTeacherValue',
+                    defaultTeacherSetting.value);
+            }
+
+            if (layoutModeSelect)
+            {
+                localStorage.setItem(
+                    'scheduleLayout',
+                    layoutModeSelect.value);
+
+                if (hasSelectedGroup())
+                {
+                    applyLayout(layoutModeSelect.value);
+                }
+            }
+        });
+    }
+
+    applyDefaultSelectionOnce();
+
 </script>

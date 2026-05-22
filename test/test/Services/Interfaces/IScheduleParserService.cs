@@ -6,6 +6,14 @@ namespace test.Services.Interfaces
     {
         Task<List<ScheduleDay>> ParseExcelAsync(string filePath);
 
-        Task<List<ScheduleDay>> ParseWebsiteAsync(string url);
+        Task<List<ScheduleDay>> ParseWebsiteAsync(
+            string url,
+            string mode,
+            string selectedTeacher,
+            string selectedGroup);
+
+        Task<List<string>> BuildWebsiteMatrixDebugAsync(string url);
+
+        Task<SourceCatalog> ParseWebsiteCatalogAsync(string url);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using test.Models;
+﻿using test.Models;
 
 namespace test.Models.ViewModels
 {
@@ -12,5 +11,9 @@ namespace test.Models.ViewModels
         public List<ScheduleDay> ScheduleDays { get; set; }
 
         public ScheduleFilterViewModel Filter { get; set; }
+
+        public Dictionary<string, List<string>> Departments { get; set; }
+
+        public List<string> DebugMatrixLines { get; set; } = new();
     }
 }

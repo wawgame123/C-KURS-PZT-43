@@ -2,6 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using test.Data;
 using test.Services;
 using test.Services.Interfaces;
+using System.Text;
+Encoding.RegisterProvider(
+    CodePagesEncodingProvider.Instance);
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();

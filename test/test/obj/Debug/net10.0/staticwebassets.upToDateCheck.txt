@@ -1,4 +1,3 @@
-wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
@@ -63,7 +62,7 @@ wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
 wwwroot\schedules\general.xlsx
 wwwroot\schedules\weekly.xlsx
-C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\wwwroot\css\site.css
+wwwroot\css\site.css
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\wwwroot\favicon.ico
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\wwwroot\js\site.js
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
@@ -125,3 +124,4 @@ C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\wwwr
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\wwwroot\lib\jquery\dist\jquery.slim.min.js
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\wwwroot\lib\jquery\dist\jquery.slim.min.map
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\wwwroot\lib\jquery\LICENSE.txt
+C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\wwwroot\css\site.css
