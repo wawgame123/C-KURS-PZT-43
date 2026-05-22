@@ -7,6 +7,9 @@ C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\test.runtimeconfig.json
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\test.dll
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\test.pdb
+C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\EPPlus.dll
+C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\EPPlus.Interfaces.dll
+C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\HtmlAgilityPack.dll
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\Humanizer.dll
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\Microsoft.Build.Framework.dll
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\Microsoft.CodeAnalysis.dll
@@ -22,6 +25,7 @@ C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Sqlite.dll
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\Microsoft.IO.RecyclableMemoryStream.dll
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\Microsoft.VisualStudio.SolutionPersistence.dll
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\Mono.TextTemplating.dll
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\Newtonsoft.Json.dll
@@ -138,7 +142,9 @@ C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\scopedcss\bundle\test.styles.css
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\scopedcss\projectbundle\test.bundle.scp.css
+C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\compressed\94exi0r4iv-{0}-0mn8o2dan3-0mn8o2dan3.gz
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\compressed\shhcaez7x8-{0}-61n19gt1b8-61n19gt1b8.gz
+C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\compressed\wfc7vfnsvp-{0}-tqcnwqx68z-tqcnwqx68z.gz
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\compressed\yovvr64f4n-{0}-bqjiyaj88i-bqjiyaj88i.gz
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\compressed\tkn7cgkkhd-{0}-c2jlpeoesf-c2jlpeoesf.gz
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\compressed\8ewlwo0mip-{0}-erw9l3u2r3-erw9l3u2r3.gz
@@ -205,16 +211,10 @@ C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\swae.build.ex.cache
+C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\test.csproj.Up2Date
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\test.dll
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\refint\test.dll
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\test.pdb
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\test.genruntimeconfig.cache
 C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\ref\test.dll
-C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\EPPlus.dll
-C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\EPPlus.Interfaces.dll
-C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\HtmlAgilityPack.dll
-C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\bin\Debug\net10.0\Microsoft.IO.RecyclableMemoryStream.dll
-C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\compressed\wfc7vfnsvp-{0}-tqcnwqx68z-tqcnwqx68z.gz
-C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
-C:\Users\tupik\OneDrive\Документы\GitHub\C#  KURS PZT-43\test\test\obj\Debug\net10.0\compressed\94exi0r4iv-{0}-0mn8o2dan3-0mn8o2dan3.gz
