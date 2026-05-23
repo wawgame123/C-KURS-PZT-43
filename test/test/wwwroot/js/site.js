@@ -2,7 +2,14 @@
     document.getElementById('themeToggle');
 
 function applyTheme(theme) {
-    if (theme === 'dark') {
+    const isDark =
+        theme === 'dark';
+
+    document.documentElement.classList.toggle(
+        'dark-theme',
+        isDark);
+
+    if (isDark) {
         document.body.classList.add('dark-theme');
     }
     else {
@@ -25,7 +32,7 @@ else {
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         const isDark =
-            document.body.classList.contains('dark-theme');
+            document.documentElement.classList.contains('dark-theme');
 
         const newTheme =
             isDark ? 'light' : 'dark';

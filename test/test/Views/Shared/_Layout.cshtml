@@ -9,6 +9,27 @@
 
     <title>@ViewData["Title"] - test</title>
 
+    <script>
+        (function () {
+            try {
+                const savedTheme =
+                    localStorage.getItem('theme');
+
+                const shouldUseDarkTheme =
+                    savedTheme === 'dark' ||
+                    (!savedTheme &&
+                        window.matchMedia &&
+                        window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+                if (shouldUseDarkTheme) {
+                    document.documentElement.classList.add('dark-theme');
+                }
+            }
+            catch {
+            }
+        })();
+    </script>
+
     <link rel="stylesheet"
           href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 

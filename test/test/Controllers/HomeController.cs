@@ -268,12 +268,23 @@ namespace test.Controllers
             {
                 foreach (var day in days)
                 {
-                    day.Lessons = day.Lessons
-                        .Where(x =>
-                            !string.IsNullOrWhiteSpace(x.Teacher) &&
-                            TeacherMatches(
-                                x.Teacher,
-                                selectedTeacher))
+                    var filteredLessons =
+                        new List<ScheduleLesson>();
+
+                    foreach (var lesson in day.Lessons)
+                    {
+                        var teacherLesson =
+                            CreateTeacherSpecificLesson(
+                                lesson,
+                                selectedTeacher);
+
+                        if (teacherLesson != null)
+                        {
+                            filteredLessons.Add(teacherLesson);
+                        }
+                    }
+
+                    day.Lessons = filteredLessons
                         .OrderBy(x => x.SortTime)
                         .ThenBy(x => x.LessonNumber)
                         .ToList();
@@ -451,17 +462,126 @@ namespace test.Controllers
             string teacherCell,
             string selectedTeacher)
         {
+            return GetTeacherPartIndex(
+                teacherCell,
+                selectedTeacher) >= 0;
+        }
+
+        private ScheduleLesson? CreateTeacherSpecificLesson(
+            ScheduleLesson lesson,
+            string selectedTeacher)
+        {
+            if (string.IsNullOrWhiteSpace(lesson.Teacher))
+            {
+                return null;
+            }
+
+            var teacherParts =
+                SplitCellParts(lesson.Teacher);
+
+            var teacherIndex =
+                GetTeacherPartIndex(
+                    lesson.Teacher,
+                    selectedTeacher);
+
+            if (teacherIndex < 0 ||
+                teacherIndex >= teacherParts.Count)
+            {
+                return null;
+            }
+
+            return new ScheduleLesson
+            {
+                LessonNumber =
+                    lesson.LessonNumber,
+
+                Time =
+                    lesson.Time,
+
+                Subject =
+                    PickParallelPart(
+                        lesson.Subject,
+                        teacherIndex,
+                        teacherParts.Count),
+
+                Teacher =
+                    teacherParts[teacherIndex],
+
+                Classroom =
+                    PickParallelPart(
+                        lesson.Classroom,
+                        teacherIndex,
+                        teacherParts.Count),
+
+                GroupName =
+                    lesson.GroupName,
+
+                SortTime =
+                    lesson.SortTime
+            };
+        }
+
+        private int GetTeacherPartIndex(
+            string teacherCell,
+            string selectedTeacher)
+        {
             var selected =
                 NormalizeTeacherKey(selectedTeacher);
 
             if (string.IsNullOrWhiteSpace(selected))
             {
-                return false;
+                return -1;
             }
 
-            return SplitTeachers(teacherCell)
-                .Select(NormalizeTeacherKey)
-                .Any(x => x == selected);
+            var teacherParts =
+                SplitCellParts(teacherCell);
+
+            for (int i = 0; i < teacherParts.Count; i++)
+            {
+                if (NormalizeTeacherKey(teacherParts[i]) == selected)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        private string PickParallelPart(
+            string value,
+            int partIndex,
+            int expectedPartCount)
+        {
+            var parts =
+                SplitCellParts(value);
+
+            if (parts.Count == expectedPartCount &&
+                partIndex < parts.Count)
+            {
+                return parts[partIndex];
+            }
+
+            return NormalizeText(value);
+        }
+
+        private List<string> SplitCellParts(string value)
+        {
+            var normalized =
+                NormalizeText(value);
+
+            if (string.IsNullOrWhiteSpace(normalized))
+            {
+                return new List<string>();
+            }
+
+            return System.Text.RegularExpressions.Regex
+                .Split(
+                    normalized,
+                    @"(?<=\s)/|/(?=\s)|(?<=\.)/(?=\s*[А-ЯЁІЇЄҐA-Z])|(?<=гр)/(?=\s*[А-ЯЁІЇЄҐA-Z])|(?<=\d)/(?=\d)",
+                    System.Text.RegularExpressions.RegexOptions.IgnoreCase)
+                .Select(x => NormalizeText(x))
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .ToList();
         }
 
         private string NormalizeTeacherKey(string teacher)

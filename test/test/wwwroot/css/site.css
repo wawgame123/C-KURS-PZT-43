@@ -3,12 +3,13 @@ html {
 }
 
 body {
-    transition: all 0.3s ease-in-out;
     background: #f5f7fb;
     color: #1f2937;
 }
 
-.dark-theme {
+html.dark-theme,
+html.dark-theme body,
+body.dark-theme {
     background: #0f172a;
     color: #f8fafc;
 }
@@ -19,7 +20,8 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-.dark-theme .card {
+html.dark-theme .card,
+body.dark-theme .card {
     background: #1e293b;
     color: white;
 }
@@ -53,7 +55,8 @@ body {
     overflow: hidden;
 }
 
-.dark-theme .lesson-block {
+html.dark-theme .lesson-block,
+body.dark-theme .lesson-block {
     background: rgba(255,255,255,0.05);
 }
 
