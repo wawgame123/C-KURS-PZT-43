@@ -695,6 +695,13 @@ namespace test.Services
                 return false;
             }
 
+            if (int.TryParse(
+                rowTexts[0],
+                out _))
+            {
+                return false;
+            }
+
             int groupLikeCells =
                 rowTexts.Count(x =>
                     IsGroupCode(x));
@@ -715,10 +722,17 @@ namespace test.Services
 
         private bool IsGroupCode(string text)
         {
+            text =
+                NormalizeCellText(text);
+
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                return false;
+            }
+
             return Regex.IsMatch(
                 text,
-                @"^([А-ЯA-ZЁІЇЄҐ]{2,8}-\d{1,3}([-/]\d{1,3})?|[А-ЯA-ZЁІЇЄҐ]{2,8})$",
-                RegexOptions.IgnoreCase);
+                @"^([А-ЯA-ZЁІЇЄҐ]{2,8}-\d{1,3}([-/]\d{1,3})?|[А-ЯA-ZЁІЇЄҐ]{2,8})$");
         }
 
         private bool IsDayCell(string text)

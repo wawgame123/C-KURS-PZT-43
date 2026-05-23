@@ -128,13 +128,15 @@ namespace test.Controllers
                 foreach (var departmentItem
                     in DepartmentData.Departments)
                 {
-                    foreach (var groupItem
-                        in departmentItem.Value)
+                    foreach (var scheduleCode
+                        in GetDepartmentScheduleCodes(
+                            departmentItem.Key,
+                            departmentItem.Value))
                     {
                         if (sourceType == "site")
                         {
                             var url =
-                                $"http://ggpk.by/Raspisanie/Files/{groupItem}.html";
+                                $"http://ggpk.by/Raspisanie/Files/{scheduleCode}.html";
 
                             var catalog =
                                 await _scheduleParserService
@@ -164,12 +166,10 @@ namespace test.Controllers
                         }
                         else
                         {
-                            var filePath = Path.Combine(
-                                _environment.ContentRootPath,
-                                "excel",
-                                departmentItem.Key,
-                                groupItem,
-                                "schedule.xlsx");
+                            var filePath =
+                                BuildExcelSchedulePath(
+                                    departmentItem.Key,
+                                    scheduleCode);
 
                             if (!System.IO.File.Exists(filePath))
                             {
@@ -193,8 +193,20 @@ namespace test.Controllers
                         DepartmentData.Departments.TryGetValue(
                             department,
                             out var departmentCodes)
-                        ? departmentCodes
-                        : new List<string> { groupCode };
+                        ? GetDepartmentScheduleCodes(
+                            department,
+                            departmentCodes)
+                        : new List<string>
+                        {
+                            ResolveScheduleCode(
+                                department,
+                                groupCode)
+                        };
+
+                    var selectedScheduleCode =
+                        ResolveScheduleCode(
+                            department,
+                            groupCode);
 
                     foreach (var code in selectedCodes)
                     {
@@ -218,7 +230,7 @@ namespace test.Controllers
                         }
 
                         if (code.Equals(
-                            groupCode,
+                            selectedScheduleCode,
                             StringComparison.OrdinalIgnoreCase))
                         {
                             if (!string.IsNullOrWhiteSpace(
@@ -247,12 +259,10 @@ namespace test.Controllers
                 }
                 else
                 {
-                    var filePath = Path.Combine(
-                        _environment.ContentRootPath,
-                        "excel",
-                        department,
-                        groupCode,
-                        "schedule.xlsx");
+                    var filePath =
+                        BuildExcelSchedulePath(
+                            department,
+                            groupCode);
 
                     if (System.IO.File.Exists(filePath))
                     {
@@ -266,6 +276,11 @@ namespace test.Controllers
             if (mode == "teacher" &&
                 !string.IsNullOrWhiteSpace(selectedTeacher))
             {
+                var selectedTeacherSubjectKeys =
+                    BuildTeacherSubjectKeys(
+                        days,
+                        selectedTeacher);
+
                 foreach (var day in days)
                 {
                     var filteredLessons =
@@ -276,7 +291,8 @@ namespace test.Controllers
                         var teacherLesson =
                             CreateTeacherSpecificLesson(
                                 lesson,
-                                selectedTeacher);
+                                selectedTeacher,
+                                selectedTeacherSubjectKeys);
 
                         if (teacherLesson != null)
                         {
@@ -416,6 +432,64 @@ namespace test.Controllers
             return View(model);
         }
 
+        private List<string> GetDepartmentScheduleCodes(
+            string department,
+            IEnumerable<string> configuredCodes)
+        {
+            var codes =
+                configuredCodes
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .ToList();
+
+            if (codes.Count > 0)
+            {
+                return codes;
+            }
+
+            return new List<string>
+            {
+                department
+            };
+        }
+
+        private string ResolveScheduleCode(
+            string department,
+            string groupCode)
+        {
+            return string.IsNullOrWhiteSpace(groupCode)
+                ? department
+                : groupCode;
+        }
+
+        private string BuildExcelSchedulePath(
+            string department,
+            string groupCode)
+        {
+            var scheduleCode =
+                ResolveScheduleCode(
+                    department,
+                    groupCode);
+
+            var nestedPath =
+                Path.Combine(
+                    _environment.ContentRootPath,
+                    "excel",
+                    department,
+                    scheduleCode,
+                    "schedule.xlsx");
+
+            if (System.IO.File.Exists(nestedPath))
+            {
+                return nestedPath;
+            }
+
+            return Path.Combine(
+                _environment.ContentRootPath,
+                "excel",
+                department,
+                "schedule.xlsx");
+        }
+
         private List<string> SplitTeachers(string teacherCell)
         {
             if (string.IsNullOrWhiteSpace(teacherCell))
@@ -469,7 +543,8 @@ namespace test.Controllers
 
         private ScheduleLesson? CreateTeacherSpecificLesson(
             ScheduleLesson lesson,
-            string selectedTeacher)
+            string selectedTeacher,
+            HashSet<string> selectedTeacherSubjectKeys)
         {
             if (string.IsNullOrWhiteSpace(lesson.Teacher))
             {
@@ -490,33 +565,49 @@ namespace test.Controllers
                 return null;
             }
 
+            var subjectSelection =
+                PickParallelPart(
+                    lesson.Subject,
+                    teacherIndex,
+                    teacherParts.Count,
+                    selectedTeacherSubjectKeys);
+
+            var classroomSelection =
+                PickParallelPart(
+                    lesson.Classroom,
+                    teacherIndex,
+                    teacherParts.Count,
+                    null);
+
+            var selectedTime =
+                PickLessonTime(
+                    lesson.Time,
+                    subjectSelection.Value,
+                    subjectSelection.PartIndex,
+                    subjectSelection.WasSplit);
+
             return new ScheduleLesson
             {
                 LessonNumber =
                     lesson.LessonNumber,
 
                 Time =
-                    lesson.Time,
+                    selectedTime,
 
                 Subject =
-                    PickParallelPart(
-                        lesson.Subject,
-                        teacherIndex,
-                        teacherParts.Count),
+                    subjectSelection.Value,
 
                 Teacher =
                     teacherParts[teacherIndex],
 
                 Classroom =
-                    PickParallelPart(
-                        lesson.Classroom,
-                        teacherIndex,
-                        teacherParts.Count),
+                    classroomSelection.Value,
 
                 GroupName =
                     lesson.GroupName,
 
                 SortTime =
+                    ExtractSortTime(selectedTime) ??
                     lesson.SortTime
             };
         }
@@ -547,10 +638,14 @@ namespace test.Controllers
             return -1;
         }
 
-        private string PickParallelPart(
+        private (
+            string Value,
+            int PartIndex,
+            bool WasSplit) PickParallelPart(
             string value,
             int partIndex,
-            int expectedPartCount)
+            int expectedPartCount,
+            HashSet<string>? preferredPartKeys)
         {
             var parts =
                 SplitCellParts(value);
@@ -558,10 +653,205 @@ namespace test.Controllers
             if (parts.Count == expectedPartCount &&
                 partIndex < parts.Count)
             {
-                return parts[partIndex];
+                return (
+                    parts[partIndex],
+                    partIndex,
+                    true);
             }
 
-            return NormalizeText(value);
+            if (preferredPartKeys != null &&
+                parts.Count > 1)
+            {
+                for (int i = 0; i < parts.Count; i++)
+                {
+                    if (preferredPartKeys.Contains(
+                        NormalizeSubjectKey(parts[i])))
+                    {
+                        return (
+                            parts[i],
+                            i,
+                            true);
+                    }
+                }
+            }
+
+            if (preferredPartKeys != null &&
+                expectedPartCount > 1 &&
+                partIndex < parts.Count)
+            {
+                return (
+                    parts[partIndex],
+                    partIndex,
+                    true);
+            }
+
+            if (preferredPartKeys != null &&
+                expectedPartCount == 1 &&
+                partIndex == 0 &&
+                parts.Count > 1)
+            {
+                return (
+                    parts[^1],
+                    parts.Count - 1,
+                    true);
+            }
+
+            return (
+                NormalizeText(value),
+                -1,
+                false);
+        }
+
+        private string PickLessonTime(
+            string time,
+            string subject,
+            int subjectPartIndex,
+            bool subjectWasSplit)
+        {
+            var normalizedTime =
+                NormalizeText(time);
+
+            var intervals =
+                System.Text.RegularExpressions.Regex
+                    .Matches(
+                        normalizedTime,
+                        @"\d{1,2}[.:]\d{2}\s*-\s*\d{1,2}[.:]\d{2}")
+                    .Select(x => NormalizeText(x.Value))
+                    .ToList();
+
+            if (intervals.Count == 0)
+            {
+                return normalizedTime;
+            }
+
+            if (subjectWasSplit &&
+                IsOneHourSubject(subject) &&
+                subjectPartIndex >= 0 &&
+                subjectPartIndex < intervals.Count)
+            {
+                return intervals[subjectPartIndex];
+            }
+
+            var hourNumber =
+                ExtractSubjectHourNumber(subject);
+
+            if (hourNumber.HasValue &&
+                hourNumber.Value > 1 &&
+                hourNumber.Value <= intervals.Count)
+            {
+                return intervals[hourNumber.Value - 1];
+            }
+
+            return normalizedTime;
+        }
+
+        private bool IsOneHourSubject(string subject)
+        {
+            return System.Text.RegularExpressions.Regex
+                .IsMatch(
+                    NormalizeText(subject),
+                    "(^|\\s)1\\s*\\u0447\\u0430\\u0441",
+                    System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        }
+
+        private int? ExtractSubjectHourNumber(string subject)
+        {
+            var match =
+                System.Text.RegularExpressions.Regex
+                    .Match(
+                        NormalizeText(subject),
+                        "(^|\\s)(\\d+)\\s*\\u0447\\u0430\\u0441",
+                        System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+            if (!match.Success ||
+                !int.TryParse(
+                    match.Groups[2].Value,
+                    out var hourNumber))
+            {
+                return null;
+            }
+
+            return hourNumber;
+        }
+
+        private TimeSpan? ExtractSortTime(string time)
+        {
+            var match =
+                System.Text.RegularExpressions.Regex
+                    .Match(
+                        NormalizeText(time),
+                        @"(\d{1,2})[.:](\d{2})");
+
+            if (!match.Success ||
+                !int.TryParse(
+                    match.Groups[1].Value,
+                    out var hours) ||
+                !int.TryParse(
+                    match.Groups[2].Value,
+                    out var minutes))
+            {
+                return null;
+            }
+
+            return new TimeSpan(
+                hours,
+                minutes,
+                0);
+        }
+
+        private HashSet<string> BuildTeacherSubjectKeys(
+            List<ScheduleDay> days,
+            string selectedTeacher)
+        {
+            var result =
+                new HashSet<string>(
+                    StringComparer.OrdinalIgnoreCase);
+
+            foreach (var lesson in days.SelectMany(x => x.Lessons))
+            {
+                if (!TeacherMatches(
+                    lesson.Teacher,
+                    selectedTeacher))
+                {
+                    continue;
+                }
+
+                var subjectParts =
+                    SplitCellParts(lesson.Subject);
+
+                var teacherParts =
+                    SplitCellParts(lesson.Teacher);
+
+                var teacherIndex =
+                    GetTeacherPartIndex(
+                        lesson.Teacher,
+                        selectedTeacher);
+
+                if (teacherIndex < 0)
+                {
+                    continue;
+                }
+
+                if (subjectParts.Count == teacherParts.Count &&
+                    teacherIndex < subjectParts.Count)
+                {
+                    result.Add(
+                        NormalizeSubjectKey(subjectParts[teacherIndex]));
+                }
+                else if (subjectParts.Count == 1)
+                {
+                    result.Add(
+                        NormalizeSubjectKey(subjectParts[0]));
+                }
+            }
+
+            return result;
+        }
+
+        private string NormalizeSubjectKey(string subject)
+        {
+            return NormalizeText(subject)
+                .ToUpperInvariant();
         }
 
         private List<string> SplitCellParts(string value)
@@ -577,8 +867,11 @@ namespace test.Controllers
             return System.Text.RegularExpressions.Regex
                 .Split(
                     normalized,
-                    @"(?<=\s)/|/(?=\s)|(?<=\.)/(?=\s*[А-ЯЁІЇЄҐA-Z])|(?<=гр)/(?=\s*[А-ЯЁІЇЄҐA-Z])|(?<=\d)/(?=\d)",
-                    System.Text.RegularExpressions.RegexOptions.IgnoreCase)
+                    "(?<=\\s)[/\\u2215\\u2044\\uFF0F\\\\]|" +
+                    "[/\\u2215\\u2044\\uFF0F\\\\](?=\\s)|" +
+                    "[/\\u2215\\u2044\\uFF0F\\\\](?=\\s*\\p{Lu})|" +
+                    "(?<=\\d)[/\\u2215\\u2044\\uFF0F\\\\](?=\\d)|" +
+                    "(?<=\\b\\u0447\\u0430\\u0441)\\s+(?=\\p{Lu})")
                 .Select(x => NormalizeText(x))
                 .Where(x => !string.IsNullOrWhiteSpace(x))
                 .ToList();
