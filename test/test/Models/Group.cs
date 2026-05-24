@@ -1,4 +1,3 @@
-﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace test.Models
@@ -9,7 +8,5 @@ namespace test.Models
 
         [Required]
         public string Name { get; set; }
-
-        public ICollection<CuratedGroup> CuratedGroups { get; set; }
     }
 }
