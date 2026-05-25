@@ -1,0 +1,324 @@
+html {
+    font-size: 14px;
+}
+
+body {
+    transition: all 0.3s ease-in-out;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+.dark-theme {
+    background: #0f172a;
+    color: #f8fafc;
+}
+
+.card {
+    border: none;
+    border-radius: 18px;
+    transition: all 0.3s ease-in-out;
+}
+
+.dark-theme .card {
+    background: #1e293b;
+    color: white;
+}
+
+.card-header {
+    border-bottom: none;
+    background: transparent;
+    text-align: center;
+}
+
+.filter-card {
+    backdrop-filter: blur(10px);
+}
+
+.schedule-card {
+    animation: fadeInUp 0.5s ease;
+}
+
+    .schedule-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+.lesson-block {
+    padding: 14px;
+    border-radius: 14px;
+    margin-bottom: 14px;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.7);
+    min-width: 0;
+    overflow: hidden;
+}
+
+.dark-theme .lesson-block {
+    background: rgba(255,255,255,0.05);
+}
+
+.lesson-block:hover {
+    transform: scale(1.02);
+}
+
+.subject-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.lesson-info {
+    opacity: 0.8;
+    font-size: 14px;
+    margin-bottom: 4px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.form-select,
+.btn {
+    border-radius: 12px;
+}
+
+@keyframes fadeInUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+main {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container-fluid {
+    max-width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.lesson-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+}
+
+ .lesson-grid > div {
+    flex: 1 1 320px;
+    min-width: 320px;
+ }
+
+body.card-size-min .lesson-grid,
+body.card-size-min .groups-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+body.card-size-max .lesson-grid,
+body.card-size-max .groups-grid {
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+}
+
+.card-size-min .lesson-grid > div {
+    flex-basis: 240px;
+    min-width: 240px;
+}
+
+.card-size-max .lesson-grid > div {
+    flex-basis: 360px;
+    min-width: 360px;
+}
+.groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.group-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.group-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(120,120,120,0.2);
+}
+
+.layout-hint {
+    display: none;
+    font-size: 13px;
+    opacity: 0.85;
+}
+
+body.horizontal-layout .lesson-grid {
+    display: block;
+}
+
+body.horizontal-layout .lesson-grid .lesson-block {
+    display: grid;
+    grid-template-columns: 120px 180px 1fr 240px 130px;
+    align-items: center;
+    gap: 10px;
+}
+
+body.horizontal-layout .lesson-grid .lesson-block .d-flex {
+    display: contents !important;
+}
+
+body.horizontal-layout .lesson-grid .lesson-num {
+    font-weight: 700;
+}
+
+body.horizontal-layout .lesson-grid .lesson-time {
+    opacity: 0.9;
+}
+
+body.horizontal-layout .lesson-grid .lesson-subject {
+    margin-bottom: 0;
+    font-size: 15px;
+}
+
+body.horizontal-layout .lesson-grid .lesson-group,
+body.horizontal-layout .lesson-grid .lesson-teacher,
+body.horizontal-layout .lesson-grid .lesson-room {
+    margin-bottom: 0;
+}
+
+@media (max-width: 1200px) {
+    body.horizontal-layout .lesson-grid .lesson-block {
+        grid-template-columns: 110px 160px 1fr;
+    }
+
+    body.horizontal-layout .lesson-grid .lesson-group {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-fluid {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .filter-card .row > [class*="col-"] {
+        width: 100%;
+    }
+
+    .filter-card .btn {
+        min-height: 36px;
+    }
+
+    #settingsPanel .btn,
+    #settingsPanel .form-select {
+        min-height: 36px;
+    }
+
+    .groups-grid,
+    .lesson-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lesson-grid > div {
+        min-width: 100%;
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .card-size-max .lesson-grid > div,
+    .card-size-min .lesson-grid > div {
+        min-width: 100%;
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .lesson-block .d-flex {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .lesson-block .lesson-time {
+        margin-left: auto;
+        text-align: right;
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .lesson-block .subject-title {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    body.horizontal-layout .lesson-grid .lesson-block {
+        display: block;
+    }
+
+    body.horizontal-layout .lesson-grid .lesson-subject {
+        margin-bottom: 8px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    #mobileFilters {
+        display: flex !important;
+        height: auto !important;
+        visibility: visible !important;
+    }
+
+    .filter-card .card-body {
+        padding: 14px;
+    }
+
+    .filter-card .form-label {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+
+    .filter-card .form-select,
+    .filter-card .btn {
+        min-height: 36px;
+        font-size: 13px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    #settingsPanel .form-select,
+    #settingsPanel .btn {
+        min-height: 34px;
+        font-size: 12px;
+    }
+
+    .filter-card .row {
+        --bs-gutter-x: 0.6rem;
+        --bs-gutter-y: 0.6rem;
+    }
+
+    .groups-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lesson-grid > div {
+        min-width: 280px;
+        flex-basis: 280px;
+    }
+}
+
+@media (min-width: 769px) {
+    #mobileFilters {
+        display: flex !important;
+        height: auto !important;
+        visibility: visible !important;
+    }
+}
