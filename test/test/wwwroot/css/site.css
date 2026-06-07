@@ -5,6 +5,13 @@ html {
 body {
     background: #f5f7fb;
     color: #1f2937;
+    --lesson-card-width: 320px;
+    --lesson-card-max-width: none;
+    --group-card-width: 320px;
+    --lesson-gap: 16px;
+    --lesson-padding: 14px;
+    --lesson-subject-size: 16px;
+    --lesson-info-size: 14px;
 }
 
 html.dark-theme,
@@ -46,9 +53,9 @@ body.dark-theme .card {
     }
 
 .lesson-block {
-    padding: 14px;
+    padding: var(--lesson-padding);
     border-radius: 14px;
-    margin-bottom: 14px;
+    margin-bottom: var(--lesson-gap);
     transition: all 0.3s ease;
     background: rgba(255,255,255,0.7);
     min-width: 0;
@@ -67,12 +74,12 @@ body.dark-theme .lesson-block {
 .subject-title {
     font-weight: 700;
     margin-bottom: 8px;
-    font-size: 16px;
+    font-size: var(--lesson-subject-size);
 }
 
 .lesson-info {
     opacity: 0.8;
-    font-size: 14px;
+    font-size: var(--lesson-info-size);
     margin-bottom: 4px;
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -109,38 +116,54 @@ main {
 .lesson-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: var(--lesson-gap);
     width: 100%;
 }
 
  .lesson-grid > div {
-    flex: 1 1 320px;
-    min-width: 320px;
+    flex: 1 1 var(--lesson-card-width);
+    min-width: var(--lesson-card-width);
+    max-width: var(--lesson-card-max-width);
  }
 
-body.card-size-min .lesson-grid,
-body.card-size-min .groups-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+body.card-size-min {
+    --lesson-card-width: 240px;
+    --lesson-card-max-width: 280px;
+    --group-card-width: 240px;
+    --lesson-gap: 10px;
+    --lesson-padding: 10px;
+    --lesson-subject-size: 14px;
+    --lesson-info-size: 12px;
 }
 
-body.card-size-max .lesson-grid,
-body.card-size-max .groups-grid {
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+body.card-size-min .lesson-grid > div {
+    flex-grow: 0;
 }
 
-.card-size-min .lesson-grid > div {
-    flex-basis: 240px;
-    min-width: 240px;
+body.card-size-max {
+    --lesson-card-width: 420px;
+    --lesson-card-max-width: none;
+    --group-card-width: 360px;
+    --lesson-gap: 18px;
+    --lesson-padding: 16px;
+    --lesson-subject-size: 16px;
+    --lesson-info-size: 14px;
 }
 
-.card-size-max .lesson-grid > div {
-    flex-basis: 360px;
-    min-width: 360px;
+body.horizontal-layout {
+    --lesson-card-width: 320px;
+    --lesson-card-max-width: none;
+    --group-card-width: 320px;
+    --lesson-gap: 16px;
+    --lesson-padding: 14px;
+    --lesson-subject-size: 16px;
+    --lesson-info-size: 14px;
 }
+
 .groups-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(var(--group-card-width), 1fr));
+    gap: var(--lesson-gap);
     width: 100%;
 }
 
@@ -166,6 +189,12 @@ body.card-size-max .groups-grid {
 
 body.horizontal-layout .lesson-grid {
     display: block;
+}
+
+body.horizontal-layout .lesson-grid > div {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
 }
 
 body.horizontal-layout .lesson-grid .lesson-block {

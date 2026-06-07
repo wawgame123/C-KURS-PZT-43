@@ -11,15 +11,10 @@ namespace test.Controllers
     {
         private readonly IScheduleParserService _scheduleParserService;
 
-        private readonly IWebHostEnvironment _environment;
-
         public HomeController(
-            IScheduleParserService scheduleParserService,
-            IWebHostEnvironment environment)
+            IScheduleParserService scheduleParserService)
         {
             _scheduleParserService = scheduleParserService;
-
-            _environment = environment;
         }
 
         [HttpGet]
@@ -34,9 +29,6 @@ namespace test.Controllers
             var selectedGroup =
                 Request.Cookies["selectedGroup"] ?? "";
 
-            var sourceType =
-                Request.Cookies["sourceType"] ?? "file";
-
             var department =
                 Request.Cookies["department"] ?? "VMSO";
 
@@ -47,7 +39,6 @@ namespace test.Controllers
                 mode,
                 selectedTeacher,
                 selectedGroup,
-                sourceType,
                 department,
                 groupCode);
         }
@@ -69,10 +60,6 @@ namespace test.Controllers
                 filter.SelectedGroup ?? "");
 
             Response.Cookies.Append(
-                "sourceType",
-                filter.SourceType ?? "file");
-
-            Response.Cookies.Append(
                 "department",
                 filter.Department ?? "VMSO");
 
@@ -88,7 +75,6 @@ namespace test.Controllers
                 filter.Mode,
                 filter.SelectedTeacher,
                 filter.SelectedGroup,
-                filter.SourceType,
                 filter.Department,
                 filter.GroupCode);
         }
@@ -97,7 +83,6 @@ namespace test.Controllers
             string mode,
             string selectedTeacher,
             string selectedGroup,
-            string sourceType,
             string department,
             string groupCode)
         {
@@ -133,85 +118,8 @@ namespace test.Controllers
                             departmentItem.Key,
                             departmentItem.Value))
                     {
-                        if (sourceType == "site")
-                        {
-                            var url =
-                                $"http://ggpk.by/Raspisanie/Files/{scheduleCode}.html";
-
-                            var catalog =
-                                await _scheduleParserService
-                                    .ParseWebsiteCatalogAsync(url);
-
-                            foreach (var groupName in catalog.Groups)
-                            {
-                                groupsCatalog.Add(groupName);
-                            }
-
-                            foreach (var teacherName in catalog.Teachers)
-                            {
-                                AddNormalizedUnique(
-                                    teachersCatalog,
-                                    teacherName);
-                            }
-
-                            var parsed =
-                                await _scheduleParserService
-                                    .ParseWebsiteAsync(
-                                        url,
-                                        mode,
-                                        selectedTeacher,
-                                        selectedGroup);
-
-                            MergeDays(days, parsed);
-                        }
-                        else
-                        {
-                            var filePath =
-                                BuildExcelSchedulePath(
-                                    departmentItem.Key,
-                                    scheduleCode);
-
-                            if (!System.IO.File.Exists(filePath))
-                            {
-                                continue;
-                            }
-
-                            var parsed =
-                                await _scheduleParserService
-                                    .ParseExcelAsync(filePath);
-
-                            MergeDays(days, parsed);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (sourceType == "site")
-                {
-                    var selectedCodes =
-                        DepartmentData.Departments.TryGetValue(
-                            department,
-                            out var departmentCodes)
-                        ? GetDepartmentScheduleCodes(
-                            department,
-                            departmentCodes)
-                        : new List<string>
-                        {
-                            ResolveScheduleCode(
-                                department,
-                                groupCode)
-                        };
-
-                    var selectedScheduleCode =
-                        ResolveScheduleCode(
-                            department,
-                            groupCode);
-
-                    foreach (var code in selectedCodes)
-                    {
                         var url =
-                            $"http://ggpk.by/Raspisanie/Files/{code}.html";
+                            $"http://ggpk.by/Raspisanie/Files/{scheduleCode}.html";
 
                         var catalog =
                             await _scheduleParserService
@@ -229,46 +137,85 @@ namespace test.Controllers
                                 teacherName);
                         }
 
-                        if (code.Equals(
-                            selectedScheduleCode,
-                            StringComparison.OrdinalIgnoreCase))
-                        {
-                            if (!string.IsNullOrWhiteSpace(
-                                effectiveSelectedGroup) &&
-                                !groupsCatalog.Contains(
-                                    effectiveSelectedGroup))
-                            {
-                                effectiveSelectedGroup = "";
-                            }
+                        var parsed =
+                            await _scheduleParserService
+                                .ParseWebsiteAsync(
+                                    url,
+                                    mode,
+                                    selectedTeacher,
+                                    selectedGroup);
 
-                            debugMatrixLines =
-                                await _scheduleParserService
-                                    .BuildWebsiteMatrixDebugAsync(url);
-
-                            var parsedDays =
-                                await _scheduleParserService
-                                    .ParseWebsiteAsync(
-                                        url,
-                                        mode,
-                                        selectedTeacher,
-                                        effectiveSelectedGroup);
-
-                            MergeDays(days, parsedDays);
-                        }
+                        MergeDays(days, parsed);
                     }
                 }
-                else
-                {
-                    var filePath =
-                        BuildExcelSchedulePath(
-                            department,
-                            groupCode);
-
-                    if (System.IO.File.Exists(filePath))
+            }
+            else
+            {
+                var selectedCodes =
+                    DepartmentData.Departments.TryGetValue(
+                        department,
+                        out var departmentCodes)
+                    ? GetDepartmentScheduleCodes(
+                        department,
+                        departmentCodes)
+                    : new List<string>
                     {
-                        days =
+                        ResolveScheduleCode(
+                            department,
+                            groupCode)
+                    };
+
+                var selectedScheduleCode =
+                    ResolveScheduleCode(
+                        department,
+                        groupCode);
+
+                foreach (var code in selectedCodes)
+                {
+                    var url =
+                        $"http://ggpk.by/Raspisanie/Files/{code}.html";
+
+                    var catalog =
+                        await _scheduleParserService
+                            .ParseWebsiteCatalogAsync(url);
+
+                    foreach (var groupName in catalog.Groups)
+                    {
+                        groupsCatalog.Add(groupName);
+                    }
+
+                    foreach (var teacherName in catalog.Teachers)
+                    {
+                        AddNormalizedUnique(
+                            teachersCatalog,
+                            teacherName);
+                    }
+
+                    if (code.Equals(
+                        selectedScheduleCode,
+                        StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (!string.IsNullOrWhiteSpace(
+                            effectiveSelectedGroup) &&
+                            !groupsCatalog.Contains(
+                                effectiveSelectedGroup))
+                        {
+                            effectiveSelectedGroup = "";
+                        }
+
+                        debugMatrixLines =
                             await _scheduleParserService
-                                .ParseExcelAsync(filePath);
+                                .BuildWebsiteMatrixDebugAsync(url);
+
+                        var parsedDays =
+                            await _scheduleParserService
+                                .ParseWebsiteAsync(
+                                    url,
+                                    mode,
+                                    selectedTeacher,
+                                    effectiveSelectedGroup);
+
+                        MergeDays(days, parsedDays);
                     }
                 }
             }
@@ -415,9 +362,6 @@ namespace test.Controllers
                             SelectedGroup =
                                 effectiveSelectedGroup,
 
-                            SourceType =
-                                sourceType,
-
                             Department =
                                 department,
 
@@ -459,35 +403,6 @@ namespace test.Controllers
             return string.IsNullOrWhiteSpace(groupCode)
                 ? department
                 : groupCode;
-        }
-
-        private string BuildExcelSchedulePath(
-            string department,
-            string groupCode)
-        {
-            var scheduleCode =
-                ResolveScheduleCode(
-                    department,
-                    groupCode);
-
-            var nestedPath =
-                Path.Combine(
-                    _environment.ContentRootPath,
-                    "excel",
-                    department,
-                    scheduleCode,
-                    "schedule.xlsx");
-
-            if (System.IO.File.Exists(nestedPath))
-            {
-                return nestedPath;
-            }
-
-            return Path.Combine(
-                _environment.ContentRootPath,
-                "excel",
-                department,
-                "schedule.xlsx");
         }
 
         private List<string> SplitTeachers(string teacherCell)
@@ -986,4 +901,4 @@ namespace test.Controllers
             }
         }
     }
-}
+}   

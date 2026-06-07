@@ -41,24 +41,16 @@
                     </div>
 
                     <div class="col-xl-2 col-lg-3 col-md-4">
-                        <label class="form-label">Размер карточек</label>
-                        <select class="form-select"
-                                id="cardSizeSelect">
-                            <option value="min">Минимум</option>
-                            <option value="max">Максимум</option>
-                        </select>
-                    </div>
-
-                    <div class="col-xl-2 col-lg-3 col-md-4">
                         <label class="form-label">По умолчанию</label>
                         <select class="form-select"
                                 id="defaultTargetMode">
-                            <option value="group">Группа</option>
+                            <option value="student">Ученик</option>
                             <option value="teacher">Преподаватель</option>
                         </select>
                     </div>
 
-                    <div class="col-xl-3 col-lg-6 col-md-6">
+                    <div class="col-xl-3 col-lg-6 col-md-6"
+                         id="defaultGroupSettingContainer">
                         <label class="form-label">Группа по умолчанию</label>
                         <select class="form-select"
                                 id="defaultGroupSetting">
@@ -70,7 +62,8 @@
                         </select>
                     </div>
 
-                    <div class="col-xl-3 col-lg-6 col-md-6">
+                    <div class="col-xl-3 col-lg-6 col-md-6"
+                         id="defaultTeacherSettingContainer">
                         <label class="form-label">Преподаватель по умолчанию</label>
                         <select class="form-select"
                                 id="defaultTeacherSetting">
@@ -88,6 +81,16 @@
                                 id="layoutModeSelect">
                             <option value="vertical">Вертикально</option>
                             <option value="horizontal">Горизонтально</option>
+                        </select>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-3 col-md-4"
+                         id="cardSizeSettingContainer">
+                        <label class="form-label">Размер карточек</label>
+                        <select class="form-select"
+                                id="cardSizeSelect">
+                            <option value="min">Минимум</option>
+                            <option value="max">Максимум</option>
                         </select>
                     </div>
 
@@ -122,29 +125,6 @@
 
                 <div class="row g-3 collapse show"
                      id="mobileFilters">
-
-                    <div class="col-xl-2 col-lg-3">
-
-                        <label class="form-label">
-                            Источник
-                        </label>
-
-                        <select class="form-select"
-                                name="SourceType">
-
-                            <option value="file"
-                                    selected="@(Model.Filter.SourceType == "file")">
-                                Excel
-                            </option>
-
-                            <option value="site"
-                                    selected="@(Model.Filter.SourceType == "site")">
-                                Сайт
-                            </option>
-
-                        </select>
-
-                    </div>
 
                     <div class="col-xl-2 col-lg-3">
 
@@ -277,7 +257,7 @@
                     <div class="col-12">
                         <div class="layout-hint mt-1"
                              id="layoutHint">
-                            Выберите группу, чтобы включить горизонтальный вид.
+                            Горизонтальный вид доступен для преподавателя или выбранной группы.
                         </div>
                     </div>
 
@@ -595,16 +575,6 @@
         filterForm.submit();
     }
 
-    const sourceTypeSelect =
-        document.querySelector('select[name="SourceType"]');
-
-    if (sourceTypeSelect)
-    {
-        sourceTypeSelect.addEventListener(
-            'change',
-            submitFilter);
-    }
-
     if (modeSelect)
     {
         modeSelect.addEventListener(
@@ -648,62 +618,88 @@
         return selectedGroupSelect.value.trim() !== '';
     }
 
+    function canUseHorizontalLayout()
+    {
+        if (modeSelect &&
+            modeSelect.value === 'teacher')
+        {
+            return true;
+        }
+
+        return hasSelectedGroup();
+    }
+
+    function normalizeLayout(layout)
+    {
+        return layout === 'horizontal'
+            ? 'horizontal'
+            : 'vertical';
+    }
+
+    function syncCardSizeSettingVisibility(layout)
+    {
+        const cardSizeSettingContainer =
+            document.getElementById('cardSizeSettingContainer');
+
+        if (!cardSizeSettingContainer)
+        {
+            return;
+        }
+
+        cardSizeSettingContainer.style.display =
+            layout === 'vertical'
+                ? 'block'
+                : 'none';
+    }
+
+    function syncLayoutControls(layout)
+    {
+        const requestedLayout =
+            normalizeLayout(layout);
+
+        const effectiveLayout =
+            canUseHorizontalLayout()
+                ? requestedLayout
+                : 'vertical';
+
+        if (layoutModeSelect)
+        {
+            layoutModeSelect.value = effectiveLayout;
+        }
+
+        applyLayout(effectiveLayout);
+
+        syncCardSizeSettingVisibility(effectiveLayout);
+
+        if (layoutHint)
+        {
+            layoutHint.style.display =
+                canUseHorizontalLayout()
+                    ? 'none'
+                    : 'block';
+        }
+
+        return effectiveLayout;
+    }
+
     if (layoutModeSelect)
     {
         const savedLayout =
             localStorage.getItem('scheduleLayout') ?? 'vertical';
 
-        layoutModeSelect.value = savedLayout;
-
-        if (hasSelectedGroup())
-        {
-            applyLayout(savedLayout);
-
-            if (layoutHint)
-            {
-                layoutHint.style.display = 'none';
-            }
-        }
-        else
-        {
-            applyLayout('vertical');
-
-            if (layoutHint)
-            {
-                layoutHint.style.display = 'block';
-            }
-        }
+        syncLayoutControls(savedLayout);
 
         layoutModeSelect.addEventListener('change', () =>
         {
             const requestedLayout =
-                layoutModeSelect.value === 'horizontal'
-                    ? 'horizontal'
-                    : 'vertical';
+                normalizeLayout(layoutModeSelect.value);
 
-            if (!hasSelectedGroup())
-            {
-                layoutModeSelect.value = 'vertical';
-                applyLayout('vertical');
-
-                if (layoutHint)
-                {
-                    layoutHint.style.display = 'block';
-                }
-
-                return;
-            }
-
-            if (layoutHint)
-            {
-                layoutHint.style.display = 'none';
-            }
+            const effectiveLayout =
+                syncLayoutControls(requestedLayout);
 
             localStorage.setItem(
                 'scheduleLayout',
-                requestedLayout);
-
-            applyLayout(requestedLayout);
+                effectiveLayout);
         });
     }
     else
@@ -722,6 +718,12 @@
 
     const defaultTeacherSetting =
         document.getElementById('defaultTeacherSetting');
+
+    const defaultGroupSettingContainer =
+        document.getElementById('defaultGroupSettingContainer');
+
+    const defaultTeacherSettingContainer =
+        document.getElementById('defaultTeacherSettingContainer');
 
     const saveSettingsBtn =
         document.getElementById('saveSettingsBtn');
@@ -756,10 +758,49 @@
         });
     }
 
+    function normalizeDefaultTargetMode(mode)
+    {
+        return mode === 'teacher'
+            ? 'teacher'
+            : 'student';
+    }
+
+    function updateDefaultSettingVisibility()
+    {
+        if (!defaultTargetMode)
+        {
+            return;
+        }
+
+        const defaultMode =
+            normalizeDefaultTargetMode(defaultTargetMode.value);
+
+        if (defaultGroupSettingContainer)
+        {
+            defaultGroupSettingContainer.style.display =
+                defaultMode === 'student'
+                    ? 'block'
+                    : 'none';
+        }
+
+        if (defaultTeacherSettingContainer)
+        {
+            defaultTeacherSettingContainer.style.display =
+                defaultMode === 'teacher'
+                    ? 'block'
+                    : 'none';
+        }
+    }
+
     if (defaultTargetMode)
     {
         defaultTargetMode.value =
-            localStorage.getItem('defaultTargetMode') ?? 'group';
+            normalizeDefaultTargetMode(
+                localStorage.getItem('defaultTargetMode') ?? 'student');
+
+        defaultTargetMode.addEventListener(
+            'change',
+            updateDefaultSettingVisibility);
     }
 
     if (defaultGroupSetting)
@@ -773,6 +814,8 @@
         defaultTeacherSetting.value =
             localStorage.getItem('defaultTeacherValue') ?? '';
     }
+
+    updateDefaultSettingVisibility();
 
     function applyDefaultSelectionOnce()
     {
@@ -789,7 +832,8 @@
         }
 
         const modePref =
-            localStorage.getItem('defaultTargetMode') ?? 'group';
+            normalizeDefaultTargetMode(
+                localStorage.getItem('defaultTargetMode') ?? 'student');
 
         const defaultGroup =
             localStorage.getItem('defaultGroupValue') ?? '';
@@ -799,7 +843,7 @@
 
         let changed = false;
 
-        if (modePref === 'group' && defaultGroup && selectedGroupSelect)
+        if (modePref === 'student' && defaultGroup && selectedGroupSelect)
         {
             if (modeSelect.value !== 'student')
             {
@@ -863,9 +907,17 @@
 
             if (defaultTargetMode)
             {
+                const defaultMode =
+                    normalizeDefaultTargetMode(defaultTargetMode.value);
+
                 localStorage.setItem(
                     'defaultTargetMode',
-                    defaultTargetMode.value);
+                    defaultMode);
+
+                defaultTargetMode.value =
+                    defaultMode;
+
+                updateDefaultSettingVisibility();
             }
 
             if (defaultGroupSetting)
@@ -884,14 +936,12 @@
 
             if (layoutModeSelect)
             {
+                const effectiveLayout =
+                    syncLayoutControls(layoutModeSelect.value);
+
                 localStorage.setItem(
                     'scheduleLayout',
-                    layoutModeSelect.value);
-
-                if (hasSelectedGroup())
-                {
-                    applyLayout(layoutModeSelect.value);
-                }
+                    effectiveLayout);
             }
         });
     }

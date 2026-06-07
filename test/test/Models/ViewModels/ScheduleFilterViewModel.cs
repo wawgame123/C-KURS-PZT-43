@@ -8,8 +8,6 @@
 
         public string SelectedGroup { get; set; }
 
-        public string SourceType { get; set; }
-
         public string Department { get; set; }
 
         public string GroupCode { get; set; }
