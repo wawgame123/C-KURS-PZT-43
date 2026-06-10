@@ -79,6 +79,124 @@ namespace test.Controllers
                 filter.GroupCode);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Classrooms(
+            string selectedDay = "",
+            int? lessonNumber = null,
+            string search = "")
+        {
+            var scheduleResult =
+                await LoadAllScheduleDaysAsync();
+
+            var days = scheduleResult.Days
+                .OrderBy(x =>
+                    ExtractScheduleDate(x.DayTitle) ??
+                    DateTime.MaxValue)
+                .ThenBy(x => x.DayTitle)
+                .ToList();
+
+            var selectedScheduleDay = days
+                .FirstOrDefault(x =>
+                    x.DayTitle.Equals(
+                        selectedDay,
+                        StringComparison.OrdinalIgnoreCase));
+
+            selectedScheduleDay ??= days
+                .FirstOrDefault(x =>
+                    ExtractScheduleDate(x.DayTitle)?.Date ==
+                    DateTime.Today);
+
+            selectedScheduleDay ??= days.FirstOrDefault();
+
+            var lessonNumbers = selectedScheduleDay == null
+                ? new List<int>()
+                : Enumerable.Range(0, 6).ToList();
+
+            var showAllLessons =
+                lessonNumber == -1;
+
+            var selectedLessonNumber =
+                showAllLessons
+                    ? -1
+                    : (lessonNumber.HasValue &&
+                       lessonNumbers.Contains(lessonNumber.Value)
+                        ? lessonNumber
+                        : lessonNumbers.Contains(1)
+                            ? 1
+                            : lessonNumbers.FirstOrDefault());
+
+            int? effectiveLessonNumber =
+                lessonNumbers.Count > 0
+                    ? selectedLessonNumber
+                    : null;
+
+            var selectedLessons = selectedScheduleDay?.Lessons
+                .Where(x =>
+                    effectiveLessonNumber.HasValue &&
+                    (showAllLessons
+                        ? x.LessonNumber >= 0 &&
+                          x.LessonNumber <= 5
+                        : x.LessonNumber ==
+                          effectiveLessonNumber.Value))
+                .ToList() ?? new List<ScheduleLesson>();
+
+            var lessonsByClassroom =
+                BuildLessonsByClassroom(selectedLessons);
+
+            var classroomStatuses = ClassroomData.Classrooms
+                .Select(classroom =>
+                {
+                    var classroomLessons =
+                        lessonsByClassroom.TryGetValue(
+                            classroom.Key,
+                            out var matchedLessons)
+                                ? matchedLessons
+                                    .OrderBy(x => x.LessonNumber)
+                                    .ThenBy(x => x.GroupName)
+                                    .ThenBy(x => x.Subject)
+                                    .ToList()
+                                : new List<ScheduleLesson>();
+
+                    return new ClassroomOccupancyViewModel
+                    {
+                        Classroom = classroom,
+                        Lessons = classroomLessons,
+                        LessonStatuses = showAllLessons
+                            ? Enumerable.Range(0, 6)
+                                .Select(number =>
+                                    new ClassroomLessonStatusViewModel
+                                    {
+                                        LessonNumber = number,
+                                        Lessons = classroomLessons
+                                            .Where(x =>
+                                                x.LessonNumber == number)
+                                            .ToList()
+                                    })
+                                .ToList()
+                            : new List<ClassroomLessonStatusViewModel>()
+                    };
+                })
+                .ToList();
+
+            classroomStatuses = FilterClassrooms(
+                classroomStatuses,
+                search);
+
+            var model = new ClassroomsViewModel
+            {
+                Days = days,
+                SelectedDayTitle =
+                    selectedScheduleDay?.DayTitle ?? "",
+                LessonNumbers = lessonNumbers,
+                SelectedLessonNumber = effectiveLessonNumber,
+                Search = search ?? "",
+                Classrooms = classroomStatuses,
+                FailedSourceCount = scheduleResult.FailedSourceCount
+            };
+
+            return View(model);
+        }
+
         private async Task<IActionResult> BuildView(
             string mode,
             string selectedTeacher,
@@ -374,6 +492,278 @@ namespace test.Controllers
                 };
 
             return View(model);
+        }
+
+        private async Task<(
+            List<ScheduleDay> Days,
+            int FailedSourceCount)> LoadAllScheduleDaysAsync()
+        {
+            var scheduleCodes = DepartmentData.Departments
+                .SelectMany(x =>
+                    GetDepartmentScheduleCodes(
+                        x.Key,
+                        x.Value))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            var loadTasks = scheduleCodes.Select(async code =>
+            {
+                try
+                {
+                    var url =
+                        $"http://ggpk.by/Raspisanie/Files/{code}.html";
+
+                    var parsedDays =
+                        await _scheduleParserService.ParseWebsiteAsync(
+                            url,
+                            "student",
+                            "",
+                            "");
+
+                    return (
+                        Succeeded: true,
+                        Days: parsedDays);
+                }
+                catch
+                {
+                    return (
+                        Succeeded: false,
+                        Days: new List<ScheduleDay>());
+                }
+            });
+
+            var loadedSchedules =
+                await Task.WhenAll(loadTasks);
+
+            var days = new List<ScheduleDay>();
+
+            foreach (var loadedSchedule in loadedSchedules)
+            {
+                MergeDays(
+                    days,
+                    loadedSchedule.Days);
+            }
+
+            foreach (var day in days)
+            {
+                var parsedDate =
+                    ExtractScheduleDate(day.DayTitle);
+
+                if (parsedDate.HasValue)
+                {
+                    day.Date = parsedDate.Value;
+                }
+
+                day.Lessons = day.Lessons
+                    .OrderBy(x => x.LessonNumber)
+                    .ThenBy(x => x.GroupName)
+                    .ToList();
+            }
+
+            return (
+                days,
+                loadedSchedules.Count(x => !x.Succeeded));
+        }
+
+        private Dictionary<string, List<ScheduleLesson>>
+            BuildLessonsByClassroom(
+                IEnumerable<ScheduleLesson> lessons)
+        {
+            var result =
+                new Dictionary<string, List<ScheduleLesson>>(
+                    StringComparer.OrdinalIgnoreCase);
+
+            foreach (var lesson in lessons)
+            {
+                foreach (var classroomKey in
+                    ExtractClassroomKeys(lesson.Classroom))
+                {
+                    if (!result.TryGetValue(
+                        classroomKey,
+                        out var classroomLessons))
+                    {
+                        classroomLessons =
+                            new List<ScheduleLesson>();
+
+                        result[classroomKey] = classroomLessons;
+                    }
+
+                    classroomLessons.Add(lesson);
+                }
+            }
+
+            return result;
+        }
+
+        private List<string> ExtractClassroomKeys(
+            string classroomValue)
+        {
+            var normalized =
+                NormalizeText(classroomValue)
+                    .ToUpperInvariant();
+
+            if (string.IsNullOrWhiteSpace(normalized))
+            {
+                return new List<string>();
+            }
+
+            var allNumbers =
+                System.Text.RegularExpressions.Regex
+                    .Matches(
+                        normalized,
+                        @"(?<!\d)\d{1,3}(?!\d)")
+                    .Select(x => int.Parse(x.Value))
+                    .ToList();
+
+            var overallDormitory =
+                normalized.Contains("ОБЩ");
+
+            var allNumbersAreDormitoryRange =
+                allNumbers.Count > 0 &&
+                allNumbers.All(IsDormitoryClassroomNumber);
+
+            var result =
+                new HashSet<string>(
+                    StringComparer.OrdinalIgnoreCase);
+
+            var parts =
+                System.Text.RegularExpressions.Regex
+                    .Split(normalized, @"[/,;]");
+
+            foreach (var part in parts)
+            {
+                var isDormitory =
+                    part.Contains("ОБЩ") ||
+                    (overallDormitory &&
+                     allNumbersAreDormitoryRange);
+
+                var numbers =
+                    System.Text.RegularExpressions.Regex
+                        .Matches(
+                            part,
+                            @"(?<!\d)\d{1,3}(?!\d)")
+                        .Select(x => int.Parse(x.Value));
+
+                foreach (var number in numbers)
+                {
+                    var classroomKey =
+                        ResolveClassroomKey(
+                            number,
+                            isDormitory);
+
+                    if (!string.IsNullOrWhiteSpace(classroomKey))
+                    {
+                        result.Add(classroomKey);
+                    }
+                }
+            }
+
+            return result.ToList();
+        }
+
+        private string ResolveClassroomKey(
+            int number,
+            bool isDormitory)
+        {
+            if (isDormitory &&
+                IsDormitoryClassroomNumber(number))
+            {
+                return $"dormitory:{number}";
+            }
+
+            if (number >= 1 && number <= 19)
+            {
+                return $"building-2:{number}";
+            }
+
+            bool isFirstBuilding =
+                number >= 101 && number <= 109 ||
+                number >= 201 && number <= 207 ||
+                number >= 301 && number <= 313;
+
+            return isFirstBuilding
+                ? $"building-1:{number}"
+                : "";
+        }
+
+        private bool IsDormitoryClassroomNumber(int number)
+        {
+            return number >= 1 && number <= 3 ||
+                   number == 5;
+        }
+
+        private List<ClassroomOccupancyViewModel> FilterClassrooms(
+            List<ClassroomOccupancyViewModel> classrooms,
+            string search)
+        {
+            var normalizedSearch =
+                NormalizeText(search)
+                    .ToUpperInvariant();
+
+            if (string.IsNullOrWhiteSpace(normalizedSearch))
+            {
+                return classrooms;
+            }
+
+            var numberMatch =
+                System.Text.RegularExpressions.Regex
+                    .Match(normalizedSearch, @"\d{1,3}");
+
+            if (numberMatch.Success)
+            {
+                var number = numberMatch.Value;
+
+                bool buildingSpecified =
+                    normalizedSearch.Contains("КОРП") ||
+                    normalizedSearch.Contains("ОБЩ");
+
+                var exactMatches = classrooms
+                    .Where(x =>
+                        x.Classroom.Number == number &&
+                        (!buildingSpecified ||
+                         normalizedSearch.Contains("ОБЩ") ==
+                         (x.Classroom.BuildingCode == "dormitory")))
+                    .ToList();
+
+                if (exactMatches.Count > 0)
+                {
+                    return exactMatches;
+                }
+            }
+
+            return classrooms
+                .Where(x =>
+                    $"{x.Classroom.BuildingName} {x.Classroom.Number}"
+                        .ToUpperInvariant()
+                        .Contains(normalizedSearch))
+                .ToList();
+        }
+
+        private DateTime? ExtractScheduleDate(
+            string dayTitle)
+        {
+            var match =
+                System.Text.RegularExpressions.Regex
+                    .Match(
+                        dayTitle ?? "",
+                        @"\b(\d{2})\.(\d{2})\.(\d{4})\b");
+
+            if (!match.Success ||
+                !int.TryParse(match.Groups[1].Value, out var day) ||
+                !int.TryParse(match.Groups[2].Value, out var month) ||
+                !int.TryParse(match.Groups[3].Value, out var year))
+            {
+                return null;
+            }
+
+            try
+            {
+                return new DateTime(year, month, day);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private List<string> GetDepartmentScheduleCodes(

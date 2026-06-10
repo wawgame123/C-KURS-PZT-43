@@ -1,0 +1,377 @@
+@model test.Models.ViewModels.ClassroomsViewModel
+
+@{
+    ViewData["Title"] = "Кабинеты";
+
+    var freeClassrooms = Model.Classrooms
+        .Where(x => !x.IsOccupied)
+        .ToList();
+
+    var occupiedClassrooms = Model.Classrooms
+        .Where(x => x.IsOccupied)
+        .ToList();
+}
+
+<div class="container-fluid py-4 classrooms-page classroom-layout-horizontal"
+     id="classroomsPage">
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <h1 class="fw-bold mb-1">Кабинеты</h1>
+            <div class="text-secondary">
+                Предварительный список помещений колледжа
+            </div>
+        </div>
+
+        <a class="btn btn-outline-secondary"
+           asp-action="Index">
+            Вернуться к расписанию
+        </a>
+    </div>
+
+    <div class="card shadow-sm mb-4 classroom-filter-card">
+        <div class="card-body">
+            <form method="get"
+                  asp-action="Classrooms"
+                  id="classroomFilterForm">
+                <div class="row g-3 align-items-end">
+                    <div class="col-xl-3 col-lg-5 col-md-6">
+                        <label class="form-label"
+                               for="selectedDay">
+                            День
+                        </label>
+                        <select class="form-select"
+                                id="selectedDay"
+                                name="selectedDay"
+                                disabled="@(Model.Days.Count == 0)">
+                            @foreach (var day in Model.Days)
+                            {
+                                <option value="@day.DayTitle"
+                                        selected="@(day.DayTitle == Model.SelectedDayTitle)">
+                                    @day.DayTitle
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-3 col-md-6">
+                        <label class="form-label"
+                               for="lessonNumber">
+                            Время
+                        </label>
+                        <select class="form-select"
+                                id="lessonNumber"
+                                name="lessonNumber"
+                                disabled="@(Model.LessonNumbers.Count == 0)">
+                            <option value="-1"
+                                    selected="@(Model.ShowAllLessons)">
+                                Все пары (0-5)
+                            </option>
+                            @foreach (var number in Model.LessonNumbers)
+                            {
+                                <option value="@number"
+                                        selected="@(number == Model.SelectedLessonNumber)">
+                                    @number-я пара
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-md-8">
+                        <label class="form-label"
+                               for="classroomSearch">
+                            Поиск кабинета
+                        </label>
+                        <input class="form-control"
+                               id="classroomSearch"
+                               name="search"
+                               value="@Model.Search"
+                               placeholder="Например: 204 или общежитие 2" />
+                    </div>
+
+                    <div class="col-xl-2 col-lg-4 col-md-4">
+                        <label class="form-label"
+                               for="classroomLayoutMode">
+                            Режим отображения
+                        </label>
+                        <select class="form-select"
+                                id="classroomLayoutMode">
+                            <option value="horizontal">Горизонтально</option>
+                            <option value="vertical">Вертикально</option>
+                        </select>
+                    </div>
+
+                    <div class="col-xl-2 col-lg-12 col-md-4">
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-primary flex-grow-1"
+                                    type="submit">
+                                Найти
+                            </button>
+
+                            @if (!string.IsNullOrWhiteSpace(Model.Search))
+                            {
+                                <a class="btn btn-outline-secondary"
+                                   asp-action="Classrooms"
+                                   asp-route-selectedDay="@Model.SelectedDayTitle"
+                                   asp-route-lessonNumber="@Model.SelectedLessonNumber">
+                                    Сбросить
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (Model.Days.Count == 0)
+    {
+        <div class="alert alert-warning">
+            Не удалось получить опубликованные дни расписания.
+        </div>
+    }
+    else
+    {
+        @if (Model.FailedSourceCount > 0)
+        {
+            <div class="alert alert-warning">
+                Часть расписаний недоступна. Статусы некоторых кабинетов могут быть неполными.
+            </div>
+        }
+
+        <div class="classroom-summary mb-4">
+            <div class="classroom-summary-item classroom-summary-free">
+                <span>@(Model.ShowAllLessons ? "Свободны все пары" : "Свободно")</span>
+                <strong>@Model.FreeCount</strong>
+            </div>
+            <div class="classroom-summary-item classroom-summary-occupied">
+                <span>@(Model.ShowAllLessons ? "Есть занятия" : "Занято")</span>
+                <strong>@Model.OccupiedCount</strong>
+            </div>
+        </div>
+
+        @if (Model.Classrooms.Count == 0)
+        {
+            <div class="alert alert-secondary">
+                Кабинет по этому запросу не найден.
+            </div>
+        }
+        else
+        {
+            <section class="classroom-section mb-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="h4 fw-bold mb-0">Свободные кабинеты</h2>
+                    <span class="classroom-section-count">@freeClassrooms.Count</span>
+                </div>
+
+                @if (freeClassrooms.Count == 0)
+                {
+                    <div class="text-secondary">
+                        Свободных кабинетов по выбранным условиям нет.
+                    </div>
+                }
+                else
+                {
+                    <div class="classroom-grid">
+                        @foreach (var room in freeClassrooms)
+                        {
+                            <article class="classroom-item classroom-free">
+                                <div class="classroom-item-header">
+                                    <div>
+                                        <div class="classroom-number">
+                                            Кабинет @room.Classroom.Number
+                                        </div>
+                                        <div class="classroom-building">
+                                            @room.Classroom.BuildingName
+                                        </div>
+                                    </div>
+                                    <span class="classroom-status classroom-status-free">
+                                        Свободен
+                                    </span>
+                                </div>
+
+                                @if (Model.ShowAllLessons)
+                                {
+                                    <div class="classroom-pair-list">
+                                        @foreach (var status in room.LessonStatuses)
+                                        {
+                                            <div class="classroom-pair-row">
+                                                <strong>@status.LessonNumber-я пара</strong>
+                                                <span class="classroom-status classroom-status-free">
+                                                    Свободен
+                                                </span>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </article>
+                        }
+                    </div>
+                }
+            </section>
+
+            <section class="classroom-section">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="h4 fw-bold mb-0">Занятые кабинеты</h2>
+                    <span class="classroom-section-count">@occupiedClassrooms.Count</span>
+                </div>
+
+                @if (occupiedClassrooms.Count == 0)
+                {
+                    <div class="text-secondary">
+                        Занятых кабинетов по выбранным условиям нет.
+                    </div>
+                }
+                else
+                {
+                    <div class="classroom-grid">
+                        @foreach (var room in occupiedClassrooms)
+                        {
+                            <article class="classroom-item classroom-occupied">
+                                <div class="classroom-item-header">
+                                    <div>
+                                        <div class="classroom-number">
+                                            Кабинет @room.Classroom.Number
+                                        </div>
+                                        <div class="classroom-building">
+                                            @room.Classroom.BuildingName
+                                        </div>
+                                    </div>
+                                    <span class="classroom-status classroom-status-occupied">
+                                        Занят
+                                    </span>
+                                </div>
+
+                                @if (Model.ShowAllLessons)
+                                {
+                                    <div class="classroom-pair-list">
+                                        @foreach (var status in room.LessonStatuses)
+                                        {
+                                            <div class="classroom-pair-row classroom-pair-row-details">
+                                                <div class="classroom-pair-heading">
+                                                    <strong>@status.LessonNumber-я пара</strong>
+                                                    <span class="classroom-status @(status.IsOccupied ? "classroom-status-occupied" : "classroom-status-free")">
+                                                        @(status.IsOccupied ? "Занят" : "Свободен")
+                                                    </span>
+                                                </div>
+
+                                                @if (status.IsOccupied)
+                                                {
+                                                    <div class="classroom-pair-lessons">
+                                                        @foreach (var lesson in status.Lessons)
+                                                        {
+                                                            <div class="classroom-lesson">
+                                                                <div class="fw-bold">@lesson.Subject</div>
+                                                                <div>@lesson.GroupName</div>
+                                                                <div>@lesson.Teacher</div>
+                                                                <div>@lesson.Time</div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="classroom-lessons">
+                                        @foreach (var lesson in room.Lessons)
+                                        {
+                                            <div class="classroom-lesson">
+                                                <div class="fw-bold">@lesson.Subject</div>
+                                                <div>@lesson.GroupName</div>
+                                                <div>@lesson.Teacher</div>
+                                                <div>@lesson.Time</div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </article>
+                        }
+                    </div>
+                }
+            </section>
+        }
+    }
+
+</div>
+
+<script>
+    const classroomFilterForm =
+        document.getElementById('classroomFilterForm');
+
+    const selectedDay =
+        document.getElementById('selectedDay');
+
+    const lessonNumber =
+        document.getElementById('lessonNumber');
+
+    const classroomsPage =
+        document.getElementById('classroomsPage');
+
+    const classroomLayoutMode =
+        document.getElementById('classroomLayoutMode');
+
+    function applyClassroomLayout(layout)
+    {
+        const effectiveLayout =
+            layout === 'vertical'
+                ? 'vertical'
+                : 'horizontal';
+
+        if (classroomsPage)
+        {
+            classroomsPage.classList.toggle(
+                'classroom-layout-horizontal',
+                effectiveLayout === 'horizontal');
+
+            classroomsPage.classList.toggle(
+                'classroom-layout-vertical',
+                effectiveLayout === 'vertical');
+        }
+
+        if (classroomLayoutMode)
+        {
+            classroomLayoutMode.value = effectiveLayout;
+        }
+    }
+
+    const savedClassroomLayout =
+        localStorage.getItem('classroomLayoutMode') ?? 'horizontal';
+
+    applyClassroomLayout(savedClassroomLayout);
+
+    if (classroomLayoutMode)
+    {
+        classroomLayoutMode.addEventListener('change', () =>
+        {
+            const layout =
+                classroomLayoutMode.value === 'vertical'
+                    ? 'vertical'
+                    : 'horizontal';
+
+            localStorage.setItem(
+                'classroomLayoutMode',
+                layout);
+
+            applyClassroomLayout(layout);
+        });
+    }
+
+    if (classroomFilterForm && selectedDay)
+    {
+        selectedDay.addEventListener('change', () =>
+        {
+            classroomFilterForm.submit();
+        });
+    }
+
+    if (classroomFilterForm && lessonNumber)
+    {
+        lessonNumber.addEventListener('change', () =>
+        {
+            classroomFilterForm.submit();
+        });
+    }
+</script>

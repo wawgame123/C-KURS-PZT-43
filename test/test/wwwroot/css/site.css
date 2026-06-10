@@ -187,6 +187,216 @@ body.horizontal-layout {
     opacity: 0.85;
 }
 
+.classroom-filter-card {
+    border-radius: 8px;
+}
+
+.classroom-summary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 220px));
+    gap: 12px;
+}
+
+.classroom-summary-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 16px;
+    border: 1px solid rgba(100, 116, 139, 0.24);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.classroom-summary-item strong {
+    font-size: 22px;
+}
+
+.classroom-summary-free {
+    border-left: 4px solid #198754;
+}
+
+.classroom-summary-occupied {
+    border-left: 4px solid #dc3545;
+}
+
+.classroom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+}
+
+.classroom-item {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid rgba(100, 116, 139, 0.24);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.classroom-free {
+    border-left: 4px solid #198754;
+}
+
+.classroom-occupied {
+    border-left: 4px solid #dc3545;
+}
+
+.classroom-item-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.classroom-number {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.classroom-building,
+.classroom-lesson {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.classroom-status,
+.classroom-section-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 26px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.classroom-status-free {
+    color: #146c43;
+    background: #d1e7dd;
+}
+
+.classroom-status-occupied {
+    color: #b02a37;
+    background: #f8d7da;
+}
+
+.classroom-section-count {
+    min-width: 32px;
+    color: #334155;
+    background: #e2e8f0;
+}
+
+.classroom-lessons {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.classroom-pair-list {
+    display: grid;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.classroom-pair-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
+    padding: 8px 0;
+}
+
+.classroom-pair-row + .classroom-pair-row {
+    border-top: 1px solid rgba(100, 116, 139, 0.14);
+}
+
+.classroom-pair-row-details {
+    display: grid;
+}
+
+.classroom-pair-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.classroom-pair-lessons {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+}
+
+.classrooms-page.classroom-layout-horizontal .classroom-grid {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.classrooms-page.classroom-layout-horizontal .classroom-pair-list {
+    grid-template-columns: repeat(6, minmax(150px, 1fr));
+    align-items: stretch;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.classrooms-page.classroom-layout-horizontal .classroom-pair-row {
+    align-content: start;
+    align-items: stretch;
+    padding: 10px;
+    border: 1px solid rgba(100, 116, 139, 0.18);
+    border-radius: 6px;
+}
+
+.classrooms-page.classroom-layout-horizontal .classroom-pair-row +
+.classroom-pair-row {
+    border-top: 1px solid rgba(100, 116, 139, 0.18);
+}
+
+.classrooms-page.classroom-layout-horizontal .classroom-pair-row:not(.classroom-pair-row-details) {
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.classrooms-page.classroom-layout-horizontal .classroom-pair-heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.classroom-lesson {
+    display: grid;
+    gap: 2px;
+    overflow-wrap: anywhere;
+}
+
+.classroom-lesson + .classroom-lesson {
+    padding-top: 10px;
+    border-top: 1px solid rgba(100, 116, 139, 0.14);
+}
+
+html.dark-theme .classroom-summary-item,
+html.dark-theme .classroom-item,
+body.dark-theme .classroom-summary-item,
+body.dark-theme .classroom-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-top-color: rgba(255, 255, 255, 0.12);
+    border-right-color: rgba(255, 255, 255, 0.12);
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+html.dark-theme .classroom-building,
+html.dark-theme .classroom-lesson,
+body.dark-theme .classroom-building,
+body.dark-theme .classroom-lesson {
+    color: #cbd5e1;
+}
+
 body.horizontal-layout .lesson-grid {
     display: block;
 }
@@ -299,6 +509,14 @@ body.horizontal-layout .lesson-grid .lesson-room {
 
     body.horizontal-layout .lesson-grid .lesson-subject {
         margin-bottom: 8px;
+    }
+
+    .classroom-summary {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .classroom-grid {
+        grid-template-columns: 1fr;
     }
 }
 

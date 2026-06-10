@@ -44,7 +44,7 @@
                         <label class="form-label">По умолчанию</label>
                         <select class="form-select"
                                 id="defaultTargetMode">
-                            <option value="student">Ученик</option>
+                            <option value="student">Учащийся</option>
                             <option value="teacher">Преподаватель</option>
                         </select>
                     </div>
@@ -94,7 +94,12 @@
                         </select>
                     </div>
 
-                    <div class="col-12 d-flex justify-content-end">
+                    <div class="col-12 d-flex flex-wrap justify-content-between gap-2">
+                        <a class="btn btn-outline-primary"
+                           asp-action="Classrooms">
+                            Кабинеты
+                        </a>
+
                         <button class="btn btn-primary"
                                 type="button"
                                 id="saveSettingsBtn">
@@ -138,7 +143,7 @@
 
                             <option value="student"
                                     selected="@(Model.Filter.Mode == "student")">
-                                Ученик
+                                Учащийся
                             </option>
 
                             <option value="teacher"
