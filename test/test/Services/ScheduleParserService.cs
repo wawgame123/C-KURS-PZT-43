@@ -131,7 +131,17 @@ namespace test.Services
 
                 if (!isLesson)
                 {
-                    continue;
+                    if (!IsUnnumberedLessonStartRow(
+                        rowTexts,
+                        headers))
+                    {
+                        continue;
+                    }
+
+                    lessonNumber =
+                        InferUnnumberedLessonNumber(
+                            currentDay,
+                            rowTexts[1]);
                 }
 
                 if (rowIndex + 2 >= rows.Count)
@@ -521,6 +531,67 @@ namespace test.Services
                 int.Parse(match.Groups[2].Value);
 
             return new TimeSpan(hour, minute, 0);
+        }
+
+        private bool IsUnnumberedLessonStartRow(
+            List<string> rowTexts,
+            Dictionary<int, string> headers)
+        {
+            if (rowTexts.Count < 3 ||
+                headers.Count == 0)
+            {
+                return false;
+            }
+
+            if (int.TryParse(
+                NormalizeCellText(rowTexts[0]),
+                out _))
+            {
+                return false;
+            }
+
+            var time =
+                rowTexts.Count > 1
+                    ? rowTexts[1]
+                    : "";
+
+            if (ExtractTime(time) == null)
+            {
+                return false;
+            }
+
+            return headers.Keys.Any(col =>
+                col < rowTexts.Count &&
+                !string.IsNullOrWhiteSpace(rowTexts[col]));
+        }
+
+        private int InferUnnumberedLessonNumber(
+            ScheduleDay currentDay,
+            string time)
+        {
+            var sortTime =
+                ExtractTime(time);
+
+            var previousLesson =
+                currentDay.Lessons
+                    .Where(x =>
+                        x.SortTime.HasValue &&
+                        (!sortTime.HasValue ||
+                         x.SortTime.Value <= sortTime.Value))
+                    .OrderByDescending(x => x.SortTime)
+                    .FirstOrDefault();
+
+            if (previousLesson != null)
+            {
+                return previousLesson.LessonNumber + 1;
+            }
+
+            if (currentDay.Lessons.Count > 0)
+            {
+                return currentDay.Lessons.Max(x => x.LessonNumber) + 1;
+            }
+
+            return 0;
         }
 
         private bool IsGroupHeaderRow(List<string> rowTexts)

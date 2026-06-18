@@ -578,6 +578,11 @@ namespace test.Controllers
                 foreach (var classroomKey in
                     ExtractClassroomKeys(lesson.Classroom))
                 {
+                    var classroomLesson =
+                        CreateClassroomSpecificLesson(
+                            lesson,
+                            classroomKey);
+
                     if (!result.TryGetValue(
                         classroomKey,
                         out var classroomLessons))
@@ -588,11 +593,146 @@ namespace test.Controllers
                         result[classroomKey] = classroomLessons;
                     }
 
-                    classroomLessons.Add(lesson);
+                    classroomLessons.Add(classroomLesson);
                 }
             }
 
             return result;
+        }
+
+        private ScheduleLesson CreateClassroomSpecificLesson(
+            ScheduleLesson lesson,
+            string classroomKey)
+        {
+            var classroomSelection =
+                PickClassroomPart(
+                    lesson.Classroom,
+                    classroomKey);
+
+            var expectedPartCount =
+                classroomSelection.PartCount;
+
+            var teacherSelection =
+                classroomSelection.WasSplit
+                    ? PickParallelPart(
+                        lesson.Teacher,
+                        classroomSelection.PartIndex,
+                        expectedPartCount,
+                        null)
+                    : (
+                        NormalizeText(lesson.Teacher),
+                        -1,
+                        false);
+
+            var subjectSelection =
+                classroomSelection.WasSplit
+                    ? PickParallelPart(
+                        lesson.Subject,
+                        classroomSelection.PartIndex,
+                        expectedPartCount,
+                        null)
+                    : (
+                        NormalizeText(lesson.Subject),
+                        -1,
+                        false);
+
+            var selectedTime =
+                PickLessonTime(
+                    lesson.Time,
+                    subjectSelection.Item1,
+                    subjectSelection.Item2,
+                    subjectSelection.Item3);
+
+            return new ScheduleLesson
+            {
+                LessonNumber =
+                    lesson.LessonNumber,
+
+                Time =
+                    selectedTime,
+
+                Subject =
+                    subjectSelection.Item1,
+
+                Teacher =
+                    teacherSelection.Item1,
+
+                Classroom =
+                    classroomSelection.Value,
+
+                GroupName =
+                    lesson.GroupName,
+
+                SortTime =
+                    ExtractSortTime(selectedTime) ??
+                    lesson.SortTime
+            };
+        }
+
+        private (
+            string Value,
+            int PartIndex,
+            int PartCount,
+            bool WasSplit) PickClassroomPart(
+            string classroomValue,
+            string classroomKey)
+        {
+            var normalized =
+                NormalizeText(classroomValue);
+
+            var parts =
+                SplitClassroomParts(classroomValue);
+
+            if (parts.Count <= 1)
+            {
+                return (
+                    normalized,
+                    -1,
+                    parts.Count,
+                    false);
+            }
+
+            for (int i = 0; i < parts.Count; i++)
+            {
+                if (ExtractClassroomKeys(parts[i])
+                    .Any(x =>
+                        x.Equals(
+                            classroomKey,
+                            StringComparison.OrdinalIgnoreCase)))
+                {
+                    return (
+                        parts[i],
+                        i,
+                        parts.Count,
+                        true);
+                }
+            }
+
+            return (
+                normalized,
+                -1,
+                parts.Count,
+                false);
+        }
+
+        private List<string> SplitClassroomParts(
+            string classroomValue)
+        {
+            var normalized =
+                NormalizeText(classroomValue);
+
+            if (string.IsNullOrWhiteSpace(normalized))
+            {
+                return new List<string>();
+            }
+
+            return System.Text.RegularExpressions.Regex
+                .Split(
+                    normalized,
+                    @"\s*[/,;]\s*")
+                .Select(x => NormalizeText(x))
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .ToList();
         }
 
         private List<string> ExtractClassroomKeys(
